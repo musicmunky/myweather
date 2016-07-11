@@ -3,6 +3,7 @@
 This site is pretty simple to setup - it's currently running as follows:
 
 * Ruby 2.x
+* Rails 4.2.x
 * CentOS 6.5
 * MySQL 5.x
 * jQuery 1.12.1
