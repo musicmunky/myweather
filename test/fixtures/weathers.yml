@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  apikey: MyString
+  service: MyString
+  reqs_per_day: 1
+  service_url: MyString
+
+two:
+  apikey: MyString
+  service: MyString
+  reqs_per_day: 1
+  service_url: MyString
