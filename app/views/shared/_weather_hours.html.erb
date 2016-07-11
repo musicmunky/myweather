@@ -1,0 +1,19 @@
+<% (start_hours..end_hours).each do |index| %>
+	<div class='hour' id='hour<%= index %>'>
+		<div id='hourofday<%= index %>' class='hourofday'>
+			<div class='hrtimediv' id='hrdisplay<%= index %>'></div>
+			<div class='hrconddiv' id='hrcondtion<%= index %>'></div>
+			<div class='hricondiv' id='hricondiv<%= index %>'>
+				<canvas id='hricon<%= index %>' width='40' height='40'></canvas>
+			</div>
+			<div class='hrtimediv' id='hrtemp<%= index %>'></div>
+			<input type='hidden' id='hrtemp<%= index %>_cnvrt' value='' />
+			<div class='hrtimediv' id='hrrain<%= index %>'>
+				<img src='assets/iconic/rain-2x.png' class='hrrainchanceicon' />
+				<span id='hrrainchance<%= index %>'></span>
+			</div>
+			<div class='hrtimediv' id='hrwind<%= index %>'></div>
+			<input type='hidden' id='hrwind<%= index %>_cnvrt' value='' />
+		</div>
+	</div>
+<% end %>

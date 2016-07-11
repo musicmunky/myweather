@@ -1,0 +1,897 @@
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color:#EEE;
+	font-family: 'Lato', serif;
+	cursor:default;
+}
+
+a {
+	text-decoration:none !important;
+	outline:none !important;
+}
+
+
+/* .temp_gradiant { */
+	/* For browsers that do not support gradients */
+/* 	background: #DC470C; */
+	/* For Safari 5.1 to 6.0 */
+/* 	background: -webkit-linear-gradient(left, #DC470C, #2A6496); */
+	/* For Opera 11.1 to 12.0 */
+/* 	background: -o-linear-gradient(right, #DC470C, #2A6496); */
+	/* For Firefox 3.6 to 15 */
+/* 	background: -moz-linear-gradient(right, #DC470C, #2A6496); */
+	/* Standard syntax (must be last) */
+/* 	background: linear-gradient(to right, #DC470C, #2A6496); */
+/* } */
+
+
+
+.fl {
+	float:left;
+}
+
+.fr {
+	float:right;
+}
+
+.weather-navbar {
+	height: 60px !important;
+	background-color:#FFF !important;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+	border:none;
+}
+
+.weather-footer {
+	position: fixed;
+	bottom: 0;
+	height: 30px;
+	opacity: .95;
+	width: 100%;
+	background-color: #FFF;
+	z-index: 1000;
+	font-size: 14px;
+	color: #666;
+	line-height: 30px;
+	box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.03), 0 0 1px 1px rgba(0, 0, 0, 0.03), 0 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+.weather-main-wrapper {
+	background-color: #FFF;
+	height: calc(100% - 30px);
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding-left: 10px;
+	padding-right: 10px;
+	min-height: 700px;
+}
+
+.mainwrapper {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#FFF;
+	height:100%;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	padding-left:10px;
+	padding-right:10px;
+	min-height:700px;
+}
+
+.oldcitywrapper {
+	padding-top:61px;
+	margin:0 0 15px -10px;
+	border-bottom:1px solid rgba(0,0,0,0.07);
+	height:102px;
+	width:calc(100% + 20px);
+	background-color:#FFF;
+	color:#333;
+}
+
+.searchbox {
+	color:#222;
+	width:190px;
+	text-align:left;
+	border:1px solid #DDD;
+	height:28px;
+	line-height:18px;
+	padding-left:5px;
+	top:18px;
+	position:relative;
+	float:left;
+	margin-left:5px;
+}
+
+.srchbtn {
+	margin-right:10px;
+	border:0px none;
+	outline:medium none;
+	float:right;
+	background-color:#FFF;
+	line-height:60px;
+	height:100%;
+	width:30px;
+}
+
+.locdiv {
+	position:absolute;
+	color:#FFF;
+	background-color:#333;
+/* 	top:45px; */
+/* 	right:95px; */
+	top:46px;
+	right:103px;
+	width:250px;
+	height:0px;
+	display:none;
+	box-shadow: 0 5px 5px 1px #343434;
+	border-radius: 4px 0 4px 4px;
+}
+
+.loclinkdiv {
+	width:100%;
+	height:40px;
+	line-height:40px;
+	overflow:hidden;
+	max-height:200px;
+	border-radius:4px;
+}
+
+.loclinkdiv:hover {
+	background-color:#666;
+}
+
+/* begin sticky footer css */
+.footer {
+	position: fixed;
+	bottom: 0;
+	height: 30px;
+	opacity: .95;
+	width: 100%;
+	background-color: #FFF;
+	z-index: 1000;
+	font-size:14px;
+	color:#666;
+	line-height:30px;
+	box-shadow:0 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.03), 0 0 1px 1px rgba(0, 0, 0, 0.03), 0 0 1px 1px rgba(0, 0, 0, 0.12)
+}
+
+.innerfooter {
+	width: 1000px;
+	margin-left:auto;
+	margin-right:auto;
+}
+/* end sticky footer css */
+
+
+/* beg sticky header css */
+.header {
+    background-color: #FFF;
+	color:#666;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    top: 0;
+    z-index: 2000;
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12)
+}
+
+.header-content {
+	width:100%;
+	height:100%;
+	line-height:1.5;
+}
+.header-nav {
+	padding:25px;
+	float:right;
+	cursor:pointer;
+}
+.main-content {
+	width:1065px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:85px;
+}
+.title {
+	width:100%;
+	line-height:2.5em;
+	font-size:24px;
+	float:left;
+}
+.arrowdiv {
+	height:20px;
+	float:left;
+	width:100%;
+}
+.spanbtn {
+	display:block !important;
+	text-align:center;
+	width:55px;
+	font-size:21px;
+	cursor:pointer;
+}
+.divider {
+	background-color: #555;
+	border-radius: 10px;
+	cursor: default;
+	height: 100%;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 0;
+	padding: 0;
+	width: 2px;
+	float:right;
+}
+/* end sticky header css */
+
+.forecast {
+	width: 100%;
+	height:610px;
+}
+
+.w50fl {
+	width:50%;
+	float:left;
+}
+
+.innerw50fl {
+	width:50%;
+	float:left;
+}
+
+.w100fl {
+	width:100%;
+	float:left;
+}
+
+.h100fl {
+	height:100%;
+	float:left;
+}
+
+.citydiv {
+	width:25%;
+	float:left;
+	height:100%;
+	line-height:40px;
+	text-align:center;
+}
+
+.citydiv:hover {
+	background-color:#EEE !important;
+}
+
+.citylink {
+	white-space:nowrap;
+	color:#333;
+	text-decoration:none;
+	display:block;
+	outline:medium none;
+	float:left;width:85%;
+	margin-left:5px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.logowrapper {
+	float:left;
+	width:200px;
+}
+
+.logoimage {
+	width:40px;
+	margin-top:10px;
+	margin-right:10px;
+	float:left;
+}
+
+.titletext {
+	float:left;
+	cursor:default;
+}
+
+.removespan {
+	float:left;
+	display:block;
+	height:35%;
+	margin-top:14px;
+	margin-left:3px;
+	cursor:pointer;
+	width:10%;
+	color:#666;
+}
+
+.locwrapper {
+	float:left;
+	margin-left:15px;
+	width:445px;
+	text-align:center;
+}
+
+.locdispwrapper {
+	font-size:25px;
+}
+
+.loccanvaswrapper {
+	height:60px;
+	display:inline-block;
+}
+
+.unitspan {
+	margin-right:10px;
+}
+
+.day {
+ 	border-radius:4px;
+    box-shadow: 0 0 1px 1px #CCC;
+    float: left;
+    height: 175px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.dayouter {
+	width:25%;
+	padding-left:15px;
+	padding-right:15px;
+	float:left;
+}
+
+.hourofday {
+	height:205px;
+	width: 95px;
+	margin-left:15px;
+	box-shadow: 0 0 1px 1px #CCC;
+	border-radius: 4px;
+}
+
+.hour {
+    float: left;
+    height: 205px;
+    position: relative;
+    text-align: center;
+	width: 12.5%;
+}
+
+.headspan {
+    display: block;
+    float: left;
+    font-size: 16px;
+    height: 100%;
+    line-height: 4em;
+	text-align:left;
+}
+
+.tfcdiv {
+	margin:10px auto;
+	width:470px;
+	height:125px;
+	box-shadow:0 0 1px 1px #CCC;
+ 	border-radius:4px;
+}
+
+#tfcheadertext {
+	border-bottom:1px solid #EEE;
+	margin-bottom:5px;
+}
+
+#condinfo {
+	width:39%;
+}
+
+#windinfo {
+	width:30%;
+}
+
+#wind {
+	margin-left:5px;
+	width:95%;
+	float:left;
+}
+
+#windlabel {
+	margin-left:5px;
+	width:90%;
+	float:left;
+}
+
+#suntimes {
+	width:30%;
+}
+
+#dailyfrc {
+	cursor:pointer;
+	margin-left:15px;
+	float:left;
+	height:40px;
+	overflow:hidden;
+	width:85%;
+}
+
+#condition {
+	height:60px;
+	line-height:60px;
+	float:left;
+}
+
+#condimg {
+	float:left;
+	padding-top:5px;
+	padding-right:5px;
+}
+
+.condimg {
+	float:left;
+	padding-top:10px;
+}
+
+.hrdisplay {
+	font-size:16px;
+}
+
+#srchcont {
+	text-align:right;
+	font-size:16px;
+	line-height:4em;
+}
+
+#searchform {
+	width:260px;
+}
+
+#srchicn {
+	width:15px;
+	height:15px;
+}
+
+.daywrapper {
+	margin-top:15px;
+}
+
+.todayhilo {
+	border-top:1px solid #EEE;
+	font-size:25px !important;
+	line-height:1.3em;
+}
+
+.tfcdivinner {
+	float:left;
+	width:33%;
+	height:45px;
+	position:relative;
+}
+
+.tfcheader {
+	margin-top:5px;
+	font-size:20px;
+	width:100%;
+	float:left;
+	height:30px;
+	text-align:center;
+}
+
+.tac {
+	text-align:center;
+}
+
+.wrmclr { color:#DC470C; }
+.cldclr { color:#2A6496; }
+
+.locationspan {
+    color: #333;
+    display: block;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 2.5em;
+    margin-left: 15px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 445px;
+}
+
+.dayofweek {
+	margin-top:8px;
+	font-size:20px;
+	letter-spacing:1px;
+	text-align:center;
+}
+
+.condition {
+	padding:5px;
+	float:none;
+	width:auto;
+	margin:5px 0 8px 0;
+	font-size:14px;
+	height:80px;
+	background-color:#fff;
+	color:#333;
+	border-bottom:1px solid #EEE;
+	border-top:1px solid #EEE;
+	cursor:pointer;
+}
+
+.conspan {
+	display:block;
+	width:150px;
+	height:60px;
+	padding-top:15px;
+	line-height:20px;
+	float:left;
+	overflow:hidden;
+}
+
+.condition-icon {
+	width:55px;
+	height:40px;
+	position:absolute;
+	right:10px;
+	top:15px;
+}
+
+.tempdiv {
+	width:33%;
+	font-size:20px;
+	height:40px;
+	line-height:40px;
+}
+
+.hightemp {
+	width:32%;
+	margin:0 3% 0 13%;
+	float:left;
+	background-color:#dc470c;
+	font-size:18px;
+	font-weight:bold;
+	padding:11px 0 10px 2%;
+}
+
+.lowtemp {
+	width:32%;
+	margin:0 13% 0 3%;
+	float:left;
+	background-color:#53aecc;
+	font-size:18px;
+	font-weight:bold;
+	padding:11px 0 10px 2%;
+}
+
+.highspan {
+	font-size:35px;
+	color:#DC470C;
+	float:left;
+}
+
+.lowspan {
+	font-size:35px;
+	color:#53aecc;
+	float:right;
+	margin-left:-10px;
+}
+
+.hourwrapper {
+	margin-top:15px;
+	margin-bottom:10px;
+}
+
+.hrtimediv {
+    font-size: 14px;
+    height: 30px;
+    padding-top: 7px;
+    width: 100%;
+	line-height:20px;
+	cursor:default;
+}
+
+.hrconddiv {
+	height: 40px;
+    line-height: 20px;
+    width: 100%;
+	font-size:11px;
+	padding-top:5px;
+	cursor:default;
+}
+
+.hricondiv {
+	width:100%;
+	height:40px;
+	padding-top:5px;
+	cursor:default;
+}
+
+.hrrainchanceicon {
+	width:15px;
+	height:15px;
+	margin-top:-1px;
+}
+.header-logo {
+	height:100%;
+	float:left;
+	padding-left:50px;
+	width:450px;
+}
+
+.header-units {
+	width:120px;
+	float:right;
+	line-height:65px;
+	height:100%;
+	margin-right:20px
+}
+
+.header-search {
+	float:right;
+	height:100%;
+	width:350px;
+}
+
+.footer-content-left {
+	width:75%;
+	float:left;
+	text-align:left;
+}
+
+.footer-content-right {
+	width:20%;
+	float:right;
+	text-align:right;
+}
+
+@media (min-width : 526px) and (max-width : 1024px) {
+	.header {
+		height:183px;
+	}
+
+	.header-logo,
+	.header-units,
+	.header-search {
+		float:none;
+		height:33%;
+		padding:0px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	.locdiv {
+		top:108px;
+		right:calc(50% - 131px);
+		border-radius: 4px;
+	}
+
+	.day {
+		margin-bottom:20px;
+	}
+
+	.tfcbtm {
+		margin-top:30px;
+	}
+	.hour {
+		margin-top:20px;
+		width:25%;
+	}
+	.hourofday {
+		margin-left:10px;
+		margin-right:10px;
+	}
+
+	.hour:hover {
+		margin-top:20px;
+	}
+
+	.hourwrapper {
+		margin-top:0px;
+	}
+	.dayouter {
+		width: 50%;
+		padding-left: 10px;
+		padding-right: 10px;
+		float: left;
+	}
+	.weather-footer {
+		height: 60px;
+	}
+	.mainwrapper {
+		width:500px;
+		height:1520px;
+	}
+
+	.oldcitywrapper {
+		padding-top:184px;
+		height:274px;
+		width:498px;
+	}
+
+	.citydiv {
+		width:50%;
+		height:50%;
+	}
+
+	.w50fl {
+		float:none;
+		width:100%;
+	}
+
+	.footer {
+		height:62px;
+	}
+
+	.innerfooter{
+		width:520px;
+	}
+
+	.footer-content-right,
+	.footer-content-center,
+	.footer-content-left {
+		width:100%;
+		text-align:center;
+	}
+
+}
+
+@media (min-width : 320px) and (max-width : 525px) {
+
+	#srchcont {
+		padding-left:10px;
+	}
+
+	#datediv {
+		width:50%;
+	}
+
+	#datewrapper {
+		float:right;
+		padding-right:10px;
+	}
+	#searchform {
+		width:calc(100% - 100px);
+	}
+	.searchbox {
+		width:100%;
+	}
+	.srchbtn {
+		margin-right:-40px;
+		margin-top:-2px;
+	}
+	.header {
+		height:183px;
+	}
+
+	.header-logo,
+	.header-units,
+	.header-search {
+		float:none;
+		height:33%;
+		padding:0px;
+		width:100%;
+		text-align:center;
+		padding-left:5px;
+	}
+
+	.tempdiv {
+		font-size:15px;
+	}
+
+	.hrrainchanceicon {
+    	width: 10px;
+    	height: 10px;
+	}
+	.title {
+		font-size: 14px;
+		line-height: 60px;
+	}
+
+	.headspan {
+		line-height:60px;
+		font-size:13px;
+	}
+	.logowrapper {
+		float:left;
+		width:50%;
+	}
+
+	.unitspan {
+		float:none;
+	}
+
+	.locdiv {
+		top:108px;
+		right:calc(50% - 131px);
+		border-radius: 4px;
+	}
+
+	.tfcdiv {
+		width:100%;
+	}
+
+	.tfcdivinner {
+		font-size: 0.7em;
+	}
+	.locwrapper,
+	.locationspan {
+		width:100%;
+		margin-left:0px;
+	}
+
+	.hrtimediv {
+		font-size:10px;
+	}
+
+	.dayouter {
+		width:50%;
+	}
+	.day {
+		width:100%;
+		margin-bottom:20px;
+	}
+	.weather-footer {
+		height:60px;
+	}
+	.conspan {
+		width:55%;
+		font-size:0.9em;
+	}
+	.tfcbtm {
+		margin-top:30px;
+	}
+	.hour {
+		margin-top:20px;
+		width:25%;
+	}
+	.hourofday {
+		width:90%;
+		margin-left:5px;
+	}
+	.hour:hover {
+		margin-top:20px;
+	}
+	.hourwrapper {
+		margin-top:0px;
+	}
+
+	.mainwrapper {
+		width: calc(100% - 22px);
+		height:1520px;
+	}
+
+	.oldcitywrapper {
+		padding-top: 184px;
+		height: 264px;
+		width: calc(100% + 20px);
+		margin: 0 0 0 -10px;
+	}
+
+	.citydiv {
+		width:50%;
+		height:50%;
+	}
+
+	.w50fl {
+		float:none;
+		width:100%;
+	}
+
+	.footer {
+		height:62px;
+	}
+
+	.innerfooter{
+		width:100%;
+	}
+
+	.footer-content-right,
+	.footer-content-center,
+	.footer-content-left {
+		width:100%;
+		text-align:center;
+	}
+}

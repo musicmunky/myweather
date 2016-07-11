@@ -1,0 +1,24 @@
+<% (start_days..end_days).each do |index| %>
+	<div class="dayouter">
+		<div class='day' id='day<%= index %>'>
+			<div id='dayofweek<%= index %>' class='dayofweek'></div>
+			<div class='condition' onclick="showCondition('conditiontext<%= index %>')">
+				<canvas id='condimg<%= index %>' class='condimg' height='50' width='50'></canvas>
+				<span id='condition<%= index %>' class='conspan'></span>
+				<input type='hidden' id='conditiontext<%= index %>' value='' />
+			</div>
+			<div class='tempdiv fl'>
+				<span id='high<%= index %>' class='wrmclr'></span>
+				<input type='hidden' id='high<%= index %>_cnvrt' value='' />
+			</div>
+			<div class='tempdiv fl'>
+				<span id='low<%= index %>' class='cldclr'></span>
+				<input type='hidden' id='low<%= index %>_cnvrt' value='' />
+			</div>
+			<div class='tempdiv fl'>
+				<img src='assets/iconic/rain-2x.png' class='hrrainchanceicon' />
+				<span id='rainchance<%= index %>'></span>
+			</div>
+		</div>
+	</div>
+<% end %>

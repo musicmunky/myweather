@@ -1,0 +1,47 @@
+/*  CSS CHECKBOX - README AND INSTALLATION GUIDE - www.csscheckbox.com
+	1. Open the included file 'style.css' and copy the CSS code into your own stylesheet
+	2. Change the classes of your HTML Radio Buttons to 'css-checkbox'
+	3. Change the classes of your HTML Radio Buttons Labels to 'css-label'
+	4. MAKE SURE that the ID of your Radio Button matches the FOR attribute of your HTML Label tag
+	Refer to the included file 'demo.html' for HTML samples and syntax.
+*/
+
+input[type=radio].css-checkbox {
+	position:absolute;
+	z-index:-1000;
+	left:-1000px;
+	overflow:hidden;
+	clip: rect(0 0 0 0);
+	height:1px;
+	width:1px;
+	margin:-1px;
+	padding:0;
+	border:0;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+	padding-left:17px;
+	height:11px;
+	display:inline-block;
+	line-height:11px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:11px;
+	vertical-align:middle;
+	cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+	background-position: 0 -11px;
+}
+
+label.css-label {
+	background-image:url(../assets/radioimage.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
