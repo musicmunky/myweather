@@ -1,28 +1,10 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This site is pretty simple to setup - it's currently running as follows:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Ruby 2.x
+* CentOS 6.5
+* MySQL 5.x
+* jQuery 1.12.1
+* Phusion Passenger
+* You'll need a Google geocode API key and Forecast.io API key.  Both are free up to a certain number of calls per day.
