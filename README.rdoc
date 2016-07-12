@@ -10,9 +10,11 @@ This site is pretty simple to setup - it's currently running as follows:
 * Phusion Passenger
 * You'll need a Google geocode API key and Forecast.io API key.  Both are free up to a certain number of calls per day.
 * You'll also need two records in the database - one for the Forecast API info, and one for the Google info.  The info may change in the future but currently it looks like this:
-- Google url:  https://maps.googleapis.com/maps/api/geocode/json?
-- Google requests per day: 2500
-- Google name (in the db): google (all lowercase)
-- Forecast url:  https://api.forecast.io/forecast/
-- Forecast requests per day: 1000
-- Forecast name (in the db): forecast (all lowercase)
+- Google Information:
+  - url:  https://maps.googleapis.com/maps/api/geocode/json?
+  - requests per day: 2500
+  - service name in the db: google (all lowercase)
+- Forecast Information:
+  - url:  https://api.forecast.io/forecast/
+  - requests per day: 1000
+  - service name in the db: forecast (all lowercase)
