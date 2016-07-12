@@ -278,17 +278,10 @@ function runSearchResponse(h)
 				var div = FUSION.lib.createHtmlElement({"type":"div",
 														"attributes":{"class":"loclinkdiv"}});
 				var lnk = FUSION.lib.createHtmlElement({"type":"a","text":geoinfo.formatted_address,
-														"style":{
-															"textDecoration":"none",
-															"color":"#EEE",
-															"display":"block",
-															"width":"90%",
-															"height":"40px",
-															"marginLeft":"5%",
-															"marginRight":"5%"
-														},
 														"onclick":"locationClick('" + JSON.stringify(geoinfo) + "')",
-													    "attributes":{"href":"javascript:void(0)"}});
+													    "attributes":{
+															"class":"locationresult",
+															"href":"javascript:void(0)" }});
 				div.appendChild(lnk);
 				locsel.appendChild(div);
 			}
@@ -511,8 +504,7 @@ function addCityDiv(h)
 												"attributes":{
 													"href":"javascript:void(0);",
 													"title": regstr,
-													"class":"citylink"
-												}});
+													"class":"citylink" }});
 
 		var img = FUSION.lib.createHtmlElement({"type":"img",
 												"onclick":"removeCityDiv('geocodeid" + hash['place_id'] + "')",

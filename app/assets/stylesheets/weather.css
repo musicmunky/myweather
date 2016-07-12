@@ -17,22 +17,6 @@ a {
 	outline:none !important;
 }
 
-
-/* .temp_gradiant { */
-	/* For browsers that do not support gradients */
-/* 	background: #DC470C; */
-	/* For Safari 5.1 to 6.0 */
-/* 	background: -webkit-linear-gradient(left, #DC470C, #2A6496); */
-	/* For Opera 11.1 to 12.0 */
-/* 	background: -o-linear-gradient(right, #DC470C, #2A6496); */
-	/* For Firefox 3.6 to 15 */
-/* 	background: -moz-linear-gradient(right, #DC470C, #2A6496); */
-	/* Standard syntax (must be last) */
-/* 	background: linear-gradient(to right, #DC470C, #2A6496); */
-/* } */
-
-
-
 .fl {
 	float:left;
 }
@@ -485,6 +469,20 @@ a {
 .wrmclr { color:#DC470C; }
 .cldclr { color:#2A6496; }
 
+.locationresult {
+	text-decoration: none;
+	color:#EEE;
+	display:block;
+	width:90%;
+	height:40px;
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.locationresult {
+	color:#FFF !important;
+	text-decoration:none;
+}
 .locationspan {
     color: #333;
     display: block;
