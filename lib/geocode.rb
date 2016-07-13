@@ -59,6 +59,8 @@ class Geocode
 				(0..respjson['results'].size - 1).each do |i|
 					pid = respjson['results'][i]['place_id']
 					locations[pid] = {
+						"time_added"		=> Time.now.to_i,
+						"active_location"	=> false,
 						"latitude"          => getLatLongInformation(i, "lat"),
 						"longitude"         => getLatLongInformation(i, "lng"),
 						"city"              => getAddressComponents(i, "city"),
