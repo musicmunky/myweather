@@ -55,28 +55,34 @@ class Geocode
 				respjson = JSON.parse(response.body)
 				self.geocode_data = respjson['results']
 
-				locations = {}
-				(0..respjson['results'].size - 1).each do |i|
-					pid = respjson['results'][i]['place_id']
-					locations[pid] = {
-						"time_added"		=> Time.now.to_i,
-						"active_location"	=> false,
-						"latitude"          => getLatLongInformation(i, "lat"),
-						"longitude"         => getLatLongInformation(i, "lng"),
-						"city"              => getAddressComponents(i, "city"),
-						"suburb"            => getAddressComponents(i, "suburb"),
-						"state"             => getAddressComponents(i, "state"),
-						"zip_code"          => getAddressComponents(i, "zipcode"),
-						"country"           => getAddressComponents(i, "country"),
-						"place_id"          => getPlaceInformation(i, "place_id"),
-						"formatted_address" => getPlaceInformation(i, "formatted_address")
-					}
-				end
+				if respjson['status'] == "OK"
+					locations = {}
+					(0..respjson['results'].size - 1).each do |i|
+						pid = respjson['results'][i]['place_id']
+						locations[pid] = {
+							"time_added"		=> Time.now.to_i,
+							"active_location"	=> false,
+							"latitude"          => getLatLongInformation(i, "lat"),
+							"longitude"         => getLatLongInformation(i, "lng"),
+							"city"              => getAddressComponents(i, "city"),
+							"suburb"            => getAddressComponents(i, "suburb"),
+							"state"             => getAddressComponents(i, "state"),
+							"zip_code"          => getAddressComponents(i, "zipcode"),
+							"country"           => getAddressComponents(i, "country"),
+							"place_id"          => getPlaceInformation(i, "place_id"),
+							"formatted_address" => getPlaceInformation(i, "formatted_address")
+							}
+					end
 
-				result['status'] = "success"
-				result['code']   = response.code.to_i
-				result['count']  = respjson['results'].size
-				result['data']   = locations
+					result['status'] = "success"
+					result['count']  = respjson['results'].size
+					result['data']   = locations
+				else
+					logger.tagged("GEOCODE") { logger.debug "Request completed with code #{response.code}, Error: #{respjson['status']} - #{respjson['error_message']}" }
+					result['status'] = respjson['status']
+					result['error']  = respjson['error_message']
+				end
+				result['code'] = response.code.to_i
 			else
 				logger.tagged("GEOCODE") { logger.debug "Request failed with status code #{response.code}, Error: #{response.body}" }
 				raise "Error making request: STATUS CODE #{response.code}, ERROR: #{response.body}"
