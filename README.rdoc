@@ -8,13 +8,13 @@ This site is pretty simple to setup - it's currently running as follows:
 * MySQL 5.x
 * jQuery 1.12.1
 * Phusion Passenger
-* You'll need a Google geocode API key and Forecast.io API key.  Both are free up to a certain number of calls per day.
-* You'll also need two records in the database - one for the Forecast API info, and one for the Google info.  The info may change in the future but currently it looks like this:
+* You'll need a Google geocode API key and DarkSky.net API key.  Both are free up to a certain number of calls per day.
+* You'll also need two records in the database - one for the Dark Sky API info, and one for the Google info.  The info may change in the future but currently it looks like this:
 - Google Information:
   - url:  https://maps.googleapis.com/maps/api/geocode/json?
   - requests per day: 2500
   - service name in the db: google (all lowercase)
-- Forecast Information:
-  - url:  https://api.forecast.io/forecast/
+- Dark Sky (previously Forecast) Information:
+  - url:  https://api.darksky.net/forecast/
   - requests per day: 1000
   - service name in the db: forecast (all lowercase)
