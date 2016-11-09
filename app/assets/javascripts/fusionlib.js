@@ -117,9 +117,7 @@ FUSION.get = {
 
 	//returns the X coordinate of the current mouse position
 	mouseX: function(e) {
-
-		return e.pageX ? e.pageX : e.clientX ? e.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft) : null;
-/*		if (e.pageX) {
+		if (e.pageX) {
 			return e.pageX;
 		}
 		if (e.clientX) {
@@ -127,14 +125,12 @@ FUSION.get = {
 									document.documentElement.scrollLeft :
 										document.body.scrollLeft);
 		}
-		return null;*/
+		return null;
 	},
 
 	//returns the Y coordinate of the current mouse position
 	mouseY: function(e) {
-
-		return e.pageY ? e.pageY : e.clientY ? e.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) : null;
-/*		if (e.pageY) {
+		if (e.pageY) {
 			return e.pageY;
 		}
 		if (e.clientY) {
@@ -142,7 +138,7 @@ FUSION.get = {
 									document.documentElement.scrollTop :
 										document.body.scrollTop);
 		}
-		return null;*/
+		return null;
 	},
 
 	//returns the size of an object - this is more geared towards JSON or
@@ -169,11 +165,23 @@ FUSION.get = {
 	},
 
 	//returns the value of a URL parameter by name
-	urlParamByName: function(name) {
-		var rgx = new RexExp(name + "=" + "(.+?)(&|$)");
-		return decodeURI(
-			(rgx.exec(location.search)||[,null])[1]
-		);
+	urlParamByName: function(name, url) {
+		try {
+			var location = url || window.location;
+			var rgx = new RegExp(name + "=" + "(.+?)(&|$)");
+			var res = (rgx.exec(location)||[,null])[1]
+
+			if(res !== null && typeof res !== undefined) {
+				return decodeURI(res);
+			}
+			else {
+				return null;
+			}
+		}
+		catch(err) {
+			FUSION.error.logError(err);
+			return null;
+		}
 	},
 
 	//returns all of the parameters in a url in a JSON object (hash table)
@@ -193,6 +201,7 @@ FUSION.get = {
 			return phash;
 		}
 		catch(err) {
+			FUSION.error.logError(err);
 			phash['is_error'] = true;
 			phash['error'] = err;
 			return phash;
@@ -349,6 +358,7 @@ FUSION.remove = {
 		}
 		catch(err) {
 			FUSION.error.logError(err);
+			return false;
 		}
 	},
 };
@@ -428,6 +438,19 @@ FUSION.error = {
 
 //BEGIN LIBRARY GENERIC METHODS
 FUSION.lib = {
+
+	//add commas to a number
+	addCommas: function(num) {
+		try {
+			return (num + "").replace(/\b(\d+)((\.\d+)*)\b/g, function(aMatches, grp1, grp2) {
+				return (grp1.charAt(0) > 0 && !(grp2 || ".").lastIndexOf(".") ? grp1.replace(/(\d)(?=(\d{3})+$)/g, "$1,") : grp1) + grp2;
+			});
+		}
+		catch(err) {
+			FUSION.error.logError(err);
+			return num;
+		}
+	},
 
 	//focus the cursor on a specific DOM element, usually an input field or a select box
 	focus: function(el) {
@@ -853,25 +876,6 @@ FUSION.lib = {
 			FUSION.error.showError(err, "There was an error creating the desired element: ");
 			return document.createElement("div");
 		}
-	},
-
-	//may end up removing this - it assumes too much regarding server configuration
-	//it was a good idea, but will probably be scrapped
-	sendErrorEmail: function(id) {
-		var uid = id;
-		var msg = FUSION.get.node("errormessage").value;
-		var fst = FUSION.get.node("fullstacktrace").value;
-		hideGeneralError();
-		var info = {
-			"type": "POST",
-			"path": "URLtoEmailFunctionality",
-			"data": {
-				user_id: uid,
-				message: msg,
-				trace: fst
-			}
-		};
-		FUSION.lib.ajaxCall(info);
 	},
 
 	//prevents a users from typing anything but numer characters in a text field
