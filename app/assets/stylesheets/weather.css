@@ -7,7 +7,7 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color:#EEE;
+	background-color:#333;
 	font-family: 'Lato', serif;
 	cursor:default;
 }
@@ -66,7 +66,7 @@ a {
 	border-right:1px solid #ddd;
 	padding-left:10px;
 	padding-right:10px;
-	min-height:700px;
+	min-height:850px;
 }
 
 .oldcitywrapper {
@@ -313,8 +313,7 @@ a {
 }
 
 .day {
- 	border-radius:4px;
-    box-shadow: 0 0 1px 1px #CCC;
+	border: 1px solid #CCC;
     float: left;
     height: 175px;
     position: relative;
@@ -324,25 +323,37 @@ a {
 
 .dayouter {
 	width:25%;
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:5px;
+	padding-right:5px;
 	float:left;
 }
 
 .hourofday {
-	height:205px;
-	width: 95px;
-	margin-left:15px;
-	box-shadow: 0 0 1px 1px #CCC;
-	border-radius: 4px;
+    height: calc(100% + 1px);
+    width: calc(100% - 20px);
+    margin-left: 10px;
+	border-bottom:1px solid #CCC;
 }
 
 .hour {
     float: left;
-    height: 205px;
-    position: relative;
+    height: 49px;
     text-align: center;
-	width: 12.5%;
+    width: 100%;
+}
+
+.hourheader {
+    float: left;
+    height: 35px;
+	line-height:35px;
+    text-align: center;
+    width: 100%;
+	margin-top:15px;
+}
+
+.hrheader {
+	line-height:35px !important;
+	font-weight:bold;
 }
 
 .headspan {
@@ -415,6 +426,7 @@ a {
 .condimg {
 	float:left;
 	padding-top:10px;
+	padding-right:10px;
 }
 
 .hrdisplay {
@@ -521,7 +533,7 @@ a {
 
 .conspan {
 	display:block;
-	width:150px;
+	width:160px;
 	height:55px;
 	padding-top:15px;
 	line-height:20px;
@@ -538,11 +550,14 @@ a {
 }
 
 .tempdiv {
-	width:33%;
 	font-size:20px;
 	height:40px;
 	line-height:40px;
 }
+
+.tmphi { width: 30%; }
+.tmplo { width: 30%; }
+.rnchnc { width:39%; }
 
 .hightemp {
 	width:32%;
@@ -578,40 +593,93 @@ a {
 }
 
 .hourwrapper {
-	margin-top:15px;
 	margin-bottom:10px;
+	height:280px;
+	overflow-y:auto;
+}
+
+.hrtempdiv {
+	float:left;
+	font-size:14px;
+	height:100%;
+	line-height:50px;
+	cursor:default;
+	width:140px;
+	text-align:center;
+	padding: 0px 15px;
+}
+
+.hrtempapparent {
+	font-style: italic;
+}
+
+.hrwinddiv {
+	float:left;
+	font-size:14px;
+	height:100%;
+	line-height:50px;
+	cursor:default;
+	width:150px;
+	text-align:center;
+	padding: 0px 15px;
+}
+
+.hrprecdiv {
+	float: left;
+    font-size: 14px;
+    height: 100%;
+    width: 140px;
+    line-height: 50px;
+    cursor: default;
+    text-align: center;
+    padding: 0px 15px;
 }
 
 .hrtimediv {
+	float: left;
     font-size: 14px;
-    height: 30px;
-    padding-top: 7px;
-    width: 100%;
-	line-height:20px;
-	cursor:default;
+    height: 100%;
+    width: 100px;
+    line-height: 50px;
+    cursor: default;
+    text-align: left;
+    padding: 0px 15px;
 }
 
 .hrconddiv {
-	height: 40px;
-    line-height: 20px;
-    width: 100%;
-	font-size:11px;
-	padding-top:5px;
-	cursor:default;
+	height: 100%;
+    line-height: 50px;
+    width: 200px;
+    font-size: 14px;
+    cursor: default;
+    float: left;
+    text-align: left;
+    padding: 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .hricondiv {
-	width:100%;
-	height:40px;
-	padding-top:5px;
-	cursor:default;
+	width: 60px;
+    height: 100%;
+    padding-top: 10px;
+    cursor: default;
+    float: left;
+}
+
+.hrhumidityicon {
+	width: 25px;
+    height: 25px;
+	margin-top: -5px;
 }
 
 .hrrainchanceicon {
-	width:15px;
-	height:15px;
-	margin-top:-1px;
+	width: 25px;
+    height: 25px;
+	margin-right: 5px;
 }
+
 .header-logo {
 	height:100%;
 	float:left;

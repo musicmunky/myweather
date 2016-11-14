@@ -2,17 +2,24 @@
 	<div class='hour' id='hour<%= index %>'>
 		<div id='hourofday<%= index %>' class='hourofday'>
 			<div class='hrtimediv' id='hrdisplay<%= index %>'></div>
-			<div class='hrconddiv' id='hrcondtion<%= index %>'></div>
 			<div class='hricondiv' id='hricondiv<%= index %>'>
-				<canvas id='hricon<%= index %>' width='40' height='40'></canvas>
+				<canvas id='hricon<%= index %>' width='30' height='30'></canvas>
 			</div>
-			<div class='hrtimediv' id='hrtemp<%= index %>'></div>
-			<input type='hidden' id='hrtemp<%= index %>_cnvrt' value='' />
-			<div class='hrtimediv' id='hrrain<%= index %>'>
-				<img src='assets/iconic/rain-2x.png' class='hrrainchanceicon' />
+			<div class='hrconddiv' id='hrcondtion<%= index %>'></div>
+			<div class='hrprecdiv' id='hrrain<%= index %>'>
+				<img src='assets/scattered-showers.svg' class='hrrainchanceicon' type='image/svg+xml' />
 				<span id='hrrainchance<%= index %>'></span>
 			</div>
-			<div class='hrtimediv' id='hrwind<%= index %>'></div>
+			<div class='hrtempdiv' id='hrtemp<%= index %>'>
+				<span id="hrtempactual<%= index %>"></span> / <span id="hrtempapparent<%= index %>" class="hrtempapparent"></span>
+			</div>
+			<input type='hidden' id='hrtempactual<%= index %>_cnvrt' value='' />
+			<input type='hidden' id='hrtempapparent<%= index %>_cnvrt' value='' />
+			<div class='hrprecdiv' id='hrhumd<%= index %>'>
+				<img src='assets/humidity.svg' class='hrhumidityicon' type='image/svg+xml' />
+				<span id='hrhumidity<%= index %>'></span>
+			</div>
+			<div class='hrwinddiv' id='hrwind<%= index %>'></div>
 			<input type='hidden' id='hrwind<%= index %>_cnvrt' value='' />
 		</div>
 	</div>

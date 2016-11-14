@@ -11,7 +11,9 @@ var MYWEATHER = {
 	validunits: ["us", "ca"],
 	fulldays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 	cnvrtflds: ["condition", "wind", "hrwind1", "hrwind2", "hrwind3", "hrwind4", "hrwind5", "hrwind6", "hrwind7", "hrwind8",
-				"hrtemp1", "hrtemp2", "hrtemp3", "hrtemp4", "hrtemp5", "hrtemp6", "hrtemp7", "hrtemp8", "high", "high2", "high3",
+				"hrtempactual1", "hrtempactual2", "hrtempactual3", "hrtempactual4", "hrtempactual5", "hrtempactual6", "hrtempactual7",
+				"hrtempactual8", "hrtempapparent1", "hrtempapparent2", "hrtempapparent3", "hrtempapparent4", "hrtempapparent5",
+				"hrtempapparent6", "hrtempapparent7", "hrtempapparent8", "high", "high2", "high3",
 				"high4", "high5", "low", "low2", "low3", "low4", "low5"]
 };
 
@@ -59,10 +61,14 @@ $( document ).ready(function() {
 		if(lsa.length > 0)
 		{
 			//sort descending by age, oldest to youngest entries
-			//lsa.sort(function(a,b) { return parseInt(a.order) - parseInt(b.order) } );
-
+			try {
+				lsa.sort(function(a,b) { return parseInt(a.time_added) - parseInt(b.time_added) } );
+			}
+			catch(err) {
+				console.log("unable to sort - no time_added field");
+			}
 			//load the first item in the array into the main area
-			locationClick(JSON.stringify(lsa[0]));
+			locationClick(JSON.stringify(lsa[lsa.length - 1]));
 
 			//create location divs for all localStorage items
 			for(var j = 0; j < lsa.length; j++)
@@ -315,6 +321,9 @@ function processForecast(h)
 
 		var adv = (FUSION.get.node("geocodeid" + geoinfo.place_id) === null) ? true : false;
 		var lcs = (localStorage.getItem("geocodeid" + geoinfo.place_id) === null) ? true : false;
+		//if(lcs) {
+		//	setLsActive(geoinfo.place_id);
+		//}
 
 		FUSION.get.node("footerlocation").innerHTML = geoinfo.formatted_address;
 		FUSION.get.node("location").innerHTML = geoinfo.formatted_address;
@@ -331,6 +340,7 @@ function processForecast(h)
 		var ofst = 3600 * (tzos + hash['forecast']['tz_offset']);
 
 		var rain = 0;
+		var humd = 0;
 		var wind = 0;
 		var drct = "";
 		var wstr = "N/A 0 " + su;
@@ -345,6 +355,7 @@ function processForecast(h)
 
 		var hrly = hash['forecast']['hourly'];
 		var hrtp = {};
+		var hrat = {};
 		var hrwd = {};
 		var hitp = {};
 		var lotp = {};
@@ -352,22 +363,27 @@ function processForecast(h)
 		for(var i = 0; i < hrly.length; i++)
 		{
 			ipp = i + 1;
-
 			FUSION.get.node("hrdisplay" + ipp).innerHTML = getTimeFromTs(hrly[i]['time'] + ofst);
 			FUSION.get.node("hrcondtion" + ipp).innerHTML = hrly[i]['summary'];
-			FUSION.get.node("hrtemp" + ipp).innerHTML = Math.round(hrly[i]['temperature']) + "&deg; " + tu;
+			FUSION.get.node("hrtempactual" + ipp).innerHTML = Math.round(hrly[i]['temperature']) + "&deg; " + tu;
+			FUSION.get.node("hrtempapparent" + ipp).innerHTML = Math.round(hrly[i]['apparentTemperature']) + "&deg; " + tu;
 			rain = Math.round(hrly[i]['precipProbability'] * 100);
 			rain += "%";
 			FUSION.get.node("hrrainchance" + ipp).innerHTML = rain;
+			humd = Math.round(hrly[i]['humidity'] * 100);
+			humd += "%";
+			FUSION.get.node("hrhumidity" + ipp).innerHTML = humd;
 			wind = Math.round(hrly[i]['windSpeed']);
 			drct = hrly[i]['windBearing'];
 			brng = wind > 0 ? getWindBearing(drct) : "N/A";
 			wstr = brng + " " + wind + " " + su;
 
 			hrtp = { "type":"temperature", "value":Math.round(hrly[i]['temperature']), "units":units, "text":{ "left":"", "right":"" }};
+			hrat = { "type":"temperature", "value":Math.round(hrly[i]['apparentTemperature']), "units":units, "text":{ "left":"", "right":"" }};
 			hrwd = { "type":"wind", "value":wind, "units":units, "text":{ "left":brng + " ", "right":"" }};
 
-			FUSION.get.node("hrtemp" + ipp + "_cnvrt").value = JSON.stringify(hrtp);
+			FUSION.get.node("hrtempactual" + ipp + "_cnvrt").value = JSON.stringify(hrtp);
+			FUSION.get.node("hrtempapparent" + ipp + "_cnvrt").value = JSON.stringify(hrat);
 			FUSION.get.node("hrwind" + ipp + "_cnvrt").value = JSON.stringify(hrwd);
 
 			FUSION.get.node("hrwind" + ipp).innerHTML = wstr;
@@ -611,5 +627,44 @@ function getTimeFromTs(ts)
 			hour = hours;
 		}
 		return hour + ':' + minutes.substr(minutes.length - 2) + " " + ampm;
+	}
+}
+
+function setLsActive(id)
+{
+	var pid = id || "";
+	if(FUSION.lib.isBlank(pid)) {
+		console.log("No place id - can not set active item");
+		return false;
+	}
+
+	if(supportsHtml5Storage())
+	{
+		var lso = {};
+		var lss = "";
+
+		var lslen = localStorage.length;
+		for(var i = 0; i < lslen; i++)
+		{
+			lss = localStorage.getItem(localStorage.key(i));
+			if(typeof lss !== undefined && /^geocodeid/.test(localStorage.key(i)))
+			{
+				try {
+					lso = JSON.parse(lss);
+					if(lso.place_id && lso.place_id !== "geocodeid" + pid) {
+						lso.active_location = false;
+					}
+					else {
+						lso.active_location = true;
+					}
+					//need to make sure this doesn't create a NEW localStorage item!!!
+					//right now it's creating duplicates...that's bad
+					localStorage.setItem("geocodeid" + pid, JSON.stringify(lso));
+				}
+				catch(err) {
+					FUSION.error.logError(err);
+				}
+			}
+		}
 	}
 }

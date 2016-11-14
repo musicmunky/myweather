@@ -94,6 +94,17 @@
 				</div>
 			</div>
 		</div>
+			<div class='hourheader' id='hourheader'>
+				<div id='hourofdayheader' class='hourofday'>
+					<div class='hrheader hrtimediv' id='hrdisplayheader'>TIME</div>
+					<div class='hrheader hricondiv' id='hricondivheader'></div>
+					<div class='hrheader hrconddiv' id='hrcondtionheader'>DESCRIPTION</div>
+					<div class='hrheader hrprecdiv' id='hrrainheader'>PRECIPITATION</div>
+					<div class='hrheader hrtempdiv' id='hrtempheader'>TEMP / <i>INDEX</i></div>
+					<div class='hrheader hrprecdiv' id='hrhumdheader'>HUMIDITY</div>
+					<div class='hrheader hrwinddiv' id='hrwindheader'>WIND</div>
+				</div>
+			</div>
 		<div id="hourwrapper" class="w100fl hourwrapper">
 			<%= render 'shared/weather_hours', start_hours: 1, end_hours: 8 %>
 		</div>
