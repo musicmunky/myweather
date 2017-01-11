@@ -1,7 +1,7 @@
 <% (start_hours..end_hours).each do |index| %>
 	<div class='hour' id='hour<%= index %>'>
 		<div id='hourofday<%= index %>' class='hourofday'>
-			<div class='hrtimediv' id='hrdisplay<%= index %>'></div>
+			<div class='hrtimediv' id='hrdisplay<%= index %>' style="padding-top:5px;"></div>
 			<div class='hricondiv' id='hricondiv<%= index %>'>
 				<canvas id='hricon<%= index %>' width='30' height='30'></canvas>
 			</div>

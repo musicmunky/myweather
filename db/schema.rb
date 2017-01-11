@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711172704) do
+ActiveRecord::Schema.define(version: 20170110220007) do
+
+  create_table "blocked_ip_addresses", force: :cascade do |t|
+    t.string "ip_address", limit: 255
+  end
 
   create_table "weathers", force: :cascade do |t|
     t.string   "apikey",       limit: 255

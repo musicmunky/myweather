@@ -4,6 +4,14 @@ class PagesController < ApplicationController
 	require 'geocode'
 
 	def index
+		@ipaddr = ""
+		begin
+			@ipaddr = request.remote_ip
+		rescue
+			@ipaddr = "error determining remote ip address"
+		ensure
+			Rails.logger.debug("\n ---- Originating IP Address of Request is #{@ipaddr} ---- \n")
+		end
 	end
 
 	def getForecastSearch

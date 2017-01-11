@@ -89,7 +89,6 @@ $( document ).ready(function() {
 		//just load the info by the default Zip code (10001)
 		runSearch(dzip);
 	}
-
 });
 
 
@@ -294,7 +293,6 @@ function runSearchResponse(h)
 		}
 		locsel.style.height = (locs * 40) + "px";
 		locsel.style.display = "block";
-
 	}
 	else
 	{
@@ -345,7 +343,6 @@ function processForecast(h)
 		var drct = "";
 		var wstr = "N/A 0 " + su;
 		var brng = "";
-		var hobj = {};
 
 		var ipp = 0;
 		var skycons = new Skycons({
@@ -363,7 +360,8 @@ function processForecast(h)
 		for(var i = 0; i < hrly.length; i++)
 		{
 			ipp = i + 1;
-			FUSION.get.node("hrdisplay" + ipp).innerHTML = getTimeFromTs(hrly[i]['time'] + ofst);
+			FUSION.get.node("hrdisplay" + ipp).innerHTML = "<span class='hrspan'>" + getTimeFromTs(hrly[i]['time'] + ofst) + "</span>" +
+															"<span class='dtspan'>" + getDateFromTs(hrly[i]['time'] + ofst) + "</span>";
 			FUSION.get.node("hrcondtion" + ipp).innerHTML = hrly[i]['summary'];
 			FUSION.get.node("hrtempactual" + ipp).innerHTML = Math.round(hrly[i]['temperature']) + "&deg; " + tu;
 			FUSION.get.node("hrtempapparent" + ipp).innerHTML = Math.round(hrly[i]['apparentTemperature']) + "&deg; " + tu;
@@ -629,6 +627,25 @@ function getTimeFromTs(ts)
 		return hour + ':' + minutes.substr(minutes.length - 2) + " " + ampm;
 	}
 }
+
+
+function getDateFromTs(ts)
+{
+	if(typeof ts === "undefined" || typeof ts !== "number" || FUSION.lib.isBlank(ts))
+	{
+		alert("Invalid timestamp given: " + ts + "\nUnable to determine date");
+		return "";
+	}
+	else
+	{
+		var date  	= new Date(ts * 1000);
+		var day 	= MYWEATHER.days[date.getDay()];
+		var dnum 	= "0" + date.getDate();
+		var mnth  	= MYWEATHER.months[date.getMonth()];
+		return day + ', ' + mnth + " " + dnum.substr(dnum.length - 2);
+	}
+}
+
 
 function setLsActive(id)
 {

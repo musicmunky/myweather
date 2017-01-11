@@ -640,10 +640,25 @@ a {
     font-size: 14px;
     height: 100%;
     width: 100px;
-    line-height: 50px;
+/*     line-height: 50px; */
+    line-height: 20px;
     cursor: default;
     text-align: left;
-    padding: 0px 15px;
+    padding: 0px 5px;
+	text-transform: uppercase;
+}
+
+.hrspan {
+	display:block;
+	width:100%;
+	text-transform: uppercase;
+}
+
+.dtspan {
+	display:block;
+	width:100%;
+	text-transform: uppercase;
+	color:#CCC;
 }
 
 .hrconddiv {
