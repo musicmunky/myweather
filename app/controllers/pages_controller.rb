@@ -1,20 +1,40 @@
 class PagesController < ApplicationController
 
+#	before_action :authenticate_user!
+
 	require 'forecast'
 	require 'geocode'
 
 	def index
-		@ipaddr = ""
-		begin
-			@ipaddr = request.remote_ip
-		rescue
-			@ipaddr = "error determining remote ip address"
-		ensure
-			Rails.logger.debug("\n ---- Originating IP Address of Request is #{@ipaddr} ---- \n")
-		end
+        Rails.logger.debug("\n ---- Originating IP Address of Request is #{@ipaddr} ---- \n")
+
+		if current_user.nil?
+			respond_to do |format|
+				format.html { redirect_to oops_url }
+			end
+        else
+            Rails.logger.debug("\n ---- CURRENT USER is #{current_user.id} ---- \n")
+
+            @ipaddr = ""
+            begin
+                @ipaddr = request.remote_ip
+            rescue
+                @ipaddr = "error determining remote ip address"
+                ensure
+                Rails.logger.debug("\n ---- Originating IP Address of Request is #{@ipaddr} ---- \n")
+            end
+        end
+
 	end
 
 	def getForecastSearch
+
+		if current_user.nil?
+			respond_to do |format|
+				format.html { redirect_to oops_url }
+			end
+        end
+
 		srch = params[:search]
 		unit = params[:units]
 
@@ -57,6 +77,13 @@ class PagesController < ApplicationController
 
 
 	def getForecastLatLong
+
+		if current_user.nil?
+			respond_to do |format|
+				format.html { redirect_to oops_url }
+			end
+        end
+
 		unit    = params[:units]
 		geoinfo = params[:geoinfo]
 

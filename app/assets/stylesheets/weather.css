@@ -17,6 +17,44 @@ a {
 	outline:none !important;
 }
 
+h3 {
+	margin-top:0px;
+	color:#FFF;
+	border-bottom:1px solid #DDD;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	width:100%;
+}
+
+.rails_form {
+	margin-left:auto;
+	margin-right:auto;
+	width:600px;
+	margin-top:25px;
+	padding:20px;
+}
+
+.rails_form_wrapper {
+    width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+}
+
+.txt100 {
+	width:100% !important;
+	resize:none;
+	border:1px solid #DDD;
+}
+
+.field {
+	float: left;
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
 .fl {
 	float:left;
 }

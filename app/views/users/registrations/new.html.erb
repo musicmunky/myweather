@@ -1,0 +1,32 @@
+
+<div class="rails_form_wrapper">
+<h3>Sign up</h3>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "rails_form", style: 'height:400px;' }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field w100fl">
+    <%= f.label :email, { style: "color:#FFF" } %><br />
+    <%= f.email_field :email, { autofocus: true, class: "txt100", style: "" } %>
+  </div>
+
+  <div class="field w100fl">
+    <%= f.label :password, { style: "color:#FFF" } %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, { autocomplete: "off", class: "txt100", style: "" } %>
+  </div>
+
+  <div class="field w100fl">
+    <%= f.label :password_confirmation, { style: "color:#FFF" } %><br />
+    <%= f.password_field :password_confirmation, { autocomplete: "off", class: "txt100", style: "" } %>
+  </div>
+
+  <div class="actions w100fl">
+    <%= f.submit "Sign up", { class: "btn btn-success", style: "float:left;width:150px;", onclick: "return checkUserForm();" } %>
+	<span style="float:right;display: block;height: 20px;margin-top: 10px;"><%= render "users/shared/links" %></span>
+  </div>
+<% end %>
+
+</div>
