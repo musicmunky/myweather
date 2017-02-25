@@ -11,17 +11,10 @@ var MYWEATHER = {
 	validunits:    ["us", "ca"],
 	fulldays:      ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     hourfields:    ["hrwind", "hrtempactual", "hrtempapparent"],
-    numhourfields: 12,
+    numhourfields: 0,
 	convertfields: ["condition", "wind", "high", "high2", "high3", "high4", "high5", "low", "low2", "low3", "low4", "low5"],
-    units: {
-        us: {
-            wind: "mph",
-            temp: "&deg; F"
-        },
-        ca: {
-            wind: "kph",
-            temp: "&deg; C"
-        }
+    units: { us: { wind: "mph", temp: "&deg; F" },
+             ca: { wind: "kph", temp: "&deg; C" }
     }
 };
 
@@ -35,6 +28,7 @@ $( document ).ready(function() {
 	}
 
 	var dzip = FUSION.get.node("defaultzipcode").value;
+    MYWEATHER.numhourfields = FUSION.get.node("hourwrapper").children.length;
 
 	if(supportsHtml5Storage())
 	{
