@@ -5,16 +5,24 @@
 // so much easier sometimes.
 
 var MYWEATHER = {
-	directions: ["N", "NNE", "NE", "ENE","E", "ESE", "SE", "SSE","S", "SSW", "SW", "WSW","W", "WNW", "NW", "NNW"],
-	months:["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-	validunits: ["us", "ca"],
-	fulldays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-	cnvrtflds: ["condition", "wind", "hrwind1", "hrwind2", "hrwind3", "hrwind4", "hrwind5", "hrwind6", "hrwind7", "hrwind8",
-				"hrtempactual1", "hrtempactual2", "hrtempactual3", "hrtempactual4", "hrtempactual5", "hrtempactual6", "hrtempactual7",
-				"hrtempactual8", "hrtempapparent1", "hrtempapparent2", "hrtempapparent3", "hrtempapparent4", "hrtempapparent5",
-				"hrtempapparent6", "hrtempapparent7", "hrtempapparent8", "high", "high2", "high3",
-				"high4", "high5", "low", "low2", "low3", "low4", "low5"]
+	directions:    ["N", "NNE", "NE", "ENE","E", "ESE", "SE", "SSE","S", "SSW", "SW", "WSW","W", "WNW", "NW", "NNW"],
+	months:        ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	days:          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+	validunits:    ["us", "ca"],
+	fulldays:      ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    hourfields:    ["hrwind", "hrtempactual", "hrtempapparent"],
+    numhourfields: 12,
+	convertfields: ["condition", "wind", "high", "high2", "high3", "high4", "high5", "low", "low2", "low3", "low4", "low5"],
+    units: {
+        us: {
+            wind: "mph",
+            temp: "&deg; F"
+        },
+        ca: {
+            wind: "kph",
+            temp: "&deg; C"
+        }
+    }
 };
 
 $( document ).ready(function() {
@@ -107,42 +115,55 @@ function setUnits(u)
 
 		var jsonfield = null;
 		var dispfield = null;
-		var jsonvalue = {};
-		var origvalue = 0;
-		var cvrtvalue = 0;
-		var jsonstrng = "";
-		var windunits = (units == "us") ? " mph" : " kph";
-		var tempunits = (units == "us") ? "&deg; F" : "&deg; C";
 
-		for(var i = 0; i < MYWEATHER.cnvrtflds.length; i++)
+        for(var i = 0; i < MYWEATHER.hourfields.length; i++)
+        {
+            for(var j = 1; j <= MYWEATHER.numhourfields; j++)
+            {
+                jsonfield = FUSION.get.node(MYWEATHER.hourfields[i] + j + "_cnvrt");
+                dispfield = FUSION.get.node(MYWEATHER.hourfields[i] + j);
+                convertFieldValue(units, jsonfield, dispfield);
+            }
+        }
+
+		for(var i = 0; i < MYWEATHER.convertfields.length; i++)
 		{
-			jsonfield = FUSION.get.node(MYWEATHER.cnvrtflds[i] + "_cnvrt");
-			dispfield = FUSION.get.node(MYWEATHER.cnvrtflds[i]);
-			if(typeof jsonfield !== null && typeof dispfield !== null)
-			{
-				try {
-					jsonvalue = JSON.parse(jsonfield.value);
-					if(jsonvalue.units != units) //make sure you don't try to convert unless the units are different!
-					{
-						origvalue = parseInt(jsonvalue.value);
-						cvrtvalue = (jsonvalue.type == "wind") ? convertWind(origvalue, units) : convertTemp(origvalue, units);
-						jsonstrng = jsonvalue.text.left + cvrtvalue + jsonvalue.text.right;
-						dispfield.innerHTML = (jsonvalue.type == "wind") ? jsonstrng + windunits : jsonstrng + tempunits;
-
-						jsonvalue.value = cvrtvalue;
-						jsonvalue.units = units;
-						jsonfield.value = JSON.stringify(jsonvalue);
-					}
-				}
-				catch(err) {
-					FUSION.error.logError(err, "Error updating unit data for field " + MYWEATHER.cnvrtflds[i] + "_cnvrt: ");
-				}
-			}
+			jsonfield = FUSION.get.node(MYWEATHER.convertfields[i] + "_cnvrt");
+			dispfield = FUSION.get.node(MYWEATHER.convertfields[i]);
+            convertFieldValue(units, jsonfield, dispfield);
 		}
 	}
 	catch(err) {
 		FUSION.error.logError(err, "Unable to set unit parameter: ");
 	}
+}
+
+
+function convertFieldValue(units, jsonfield, displayfield)
+{
+    if(typeof jsonfield !== null && typeof displayfield !== null)
+    {
+		var windunits = MYWEATHER.units[units]['wind'];
+		var tempunits = MYWEATHER.units[units]['temp'];
+
+        try {
+            var jsonvalue = JSON.parse(jsonfield.value);
+            if(jsonvalue.units != units) //make sure you don't try to convert unless the units are different!
+            {
+                var origvalue = parseInt(jsonvalue.value);
+                var cvrtvalue = (jsonvalue.type == "wind") ? convertWind(origvalue, units) : convertTemp(origvalue, units);
+                var jsonstrng = jsonvalue.text.left + cvrtvalue + jsonvalue.text.right;
+                displayfield.innerHTML = (jsonvalue.type == "wind") ? jsonstrng + " " + windunits : jsonstrng + tempunits;
+
+                jsonvalue.value = cvrtvalue;
+                jsonvalue.units = units;
+                jsonfield.value = JSON.stringify(jsonvalue);
+            }
+        }
+        catch(err) {
+            FUSION.error.logError(err, "Error updating unit data for field " + MYWEATHER.convertfields[i] + "_cnvrt: ");
+        }
+    }
 }
 
 
