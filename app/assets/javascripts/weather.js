@@ -356,8 +356,8 @@ function processForecast(h)
 		var humd = 0;
 		var wind = 0;
 		var drct = "";
-		var wstr = "N/A 0 " + su;
 		var brng = "";
+		var wstr = "N/A 0 " + su;
 
 		var ipp = 0;
 		var skycons = new Skycons({
@@ -439,7 +439,6 @@ function processForecast(h)
 		FUSION.get.node("low_cnvrt").value 	= JSON.stringify(lotp);
 		FUSION.get.node("high").innerHTML 	= Math.round(daly[0]['temperatureMax']) + "&deg; " + tu;
 		FUSION.get.node("low").innerHTML 	= Math.round(daly[0]['temperatureMin']) + "&deg; " + tu;
-
 
 		var dte = 0;
 		var dstr = "";
