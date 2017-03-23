@@ -2,11 +2,11 @@
 
 This site is pretty simple to setup - it's currently running as follows:
 
-* Ruby 2.x
-* Rails 4.2.x
-* CentOS 6.5
+* Ruby 2.4.x
+* Rails 5.0.x
+* CentOS 6.8
 * MySQL 5.x
-* jQuery 1.12.1
+* jQuery 1.12.x
 * Phusion Passenger
 * You'll need a Google geocode API key and DarkSky.net API key.  Both are free up to a certain number of calls per day.
 * You'll also need two records in the database - one for the Dark Sky API info, and one for the Google info.  The info may change in the future but currently it looks like this:
@@ -15,6 +15,6 @@ This site is pretty simple to setup - it's currently running as follows:
   - requests per day: 2500
   - service name in the db: google (all lowercase)
 - Dark Sky (previously Forecast) Information:
-  - url:  https://api.darksky.net/forecast/
+  - url:  https://darksky.net/dev/docs
   - requests per day: 1000
   - service name in the db: forecast (all lowercase)
