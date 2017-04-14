@@ -55,7 +55,7 @@ class Forecast
 				result['daily']     = respjson['daily']['data'][0..5]
 				result['current']   = respjson['currently']
 				result['timezone']  = respjson['timezone']
-				result['tz_offset'] = respjson['offset']
+				result['tz_offset'] = respjson['offset'] # offset is deprecated, need to update the code to account for this
 			else
 				logger.tagged("FORECAST") { logger.debug "Request failed with status code #{response.code}, Error: #{response.body}" }
 				raise "Error making request: STATUS CODE #{response.code}, ERROR: #{response.body}"
