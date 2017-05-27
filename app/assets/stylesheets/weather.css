@@ -26,6 +26,59 @@ h3 {
 	width:100%;
 }
 
+.wrapper {
+    float: left;
+    width: calc(100% - 19px);
+    background-color: #fff;
+    margin-left: 9px;
+    margin-right: 10px;
+    margin-bottom:10px;
+    border: 1px solid #ddd;
+}
+
+.tabwrapper {
+    float:left;
+    width:100%;
+    background-color:#f1f1f1;
+}
+
+.tabs {
+    float: left;
+    width: calc(50% - 19px);
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 4px 4px 0px 0px;
+    border: 1px solid #ddd;
+    margin-left: 9px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-bottom: none;
+    font-size: 18px;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: -1px;
+}
+
+.panewrapper {
+    float:left;
+    width:100%;
+    background-color:#f1f1f1;
+}
+
+#day_wrapper {
+    display:none;
+}
+
+#day_tab {
+    border-bottom:1px solid #ddd;
+}
+
+#hour_tab {
+    box-shadow: 0px -2px 3px -2px rgba(0, 0, 0, 1);
+}
+
 .rails_form {
 	margin-left:auto;
 	margin-right:auto;
@@ -146,8 +199,6 @@ h3 {
 	position:absolute;
 	color:#FFF;
 	background-color:#333;
-/* 	top:45px; */
-/* 	right:95px; */
 	top:46px;
 	right:103px;
 	width:250px;
@@ -351,19 +402,16 @@ h3 {
 }
 
 .day {
-	border: 1px solid #CCC;
     float: left;
-    height: 175px;
-    position: relative;
-    text-align: center;
+    height: 49px;
     width: 100%;
 }
 
-.dayouter {
-	width:25%;
-	padding-left:5px;
-	padding-right:5px;
-	float:left;
+.dayrow {
+    height: calc(100% + 1px);
+    width: calc(100% - 20px);
+    margin-left: 10px;
+	border-bottom:1px solid #CCC;
 }
 
 .hourofday {
@@ -485,10 +533,6 @@ h3 {
 	height:15px;
 }
 
-.daywrapper {
-	margin-top:15px;
-}
-
 .todayhilo {
 	border-top:1px solid #EEE;
 	font-size:25px !important;
@@ -548,34 +592,37 @@ h3 {
 }
 
 .dayofweek {
-	margin-top:8px;
-	font-size:20px;
-	letter-spacing:1px;
-	text-align:center;
+	float: left;
+    font-size: 14px;
+    height: 100%;
+    width: 110px;
+    line-height: 50px;
+    cursor: default;
+    text-align: left;
+    padding: 0px 5px;
+	text-transform: uppercase;
 }
 
 .condition {
-	padding:5px;
-	float:none;
-	width:auto;
-	margin:5px 0 8px 0;
-	font-size:14px;
-	height:80px;
-	background-color:#fff;
-	color:#333;
-	border-bottom:1px solid #EEE;
-	border-top:1px solid #EEE;
-	cursor:pointer;
+    padding: 0px 10px;
+    float: left;
+    width: 265px;
+    font-size: 14px;
+    height: 100%;
+    color: #333;
+    cursor: pointer;
 }
 
 .conspan {
-	display:block;
-	width:160px;
-	height:55px;
-	padding-top:15px;
-	line-height:20px;
-	float:left;
-	overflow:hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    float: left;
+    cursor:pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .condition-icon {
@@ -587,9 +634,8 @@ h3 {
 }
 
 .tempdiv {
-	font-size:20px;
-	height:40px;
-	line-height:40px;
+	height:100%;
+	line-height:50px;
 }
 
 .tmphi { width: 30%; }
@@ -629,9 +675,9 @@ h3 {
 	margin-left:-10px;
 }
 
-.hourwrapper {
+.list {
 	margin-bottom:10px;
-	height:280px;
+	height:350px;
 	overflow-y:auto;
 }
 
@@ -665,7 +711,7 @@ h3 {
 	float: left;
     font-size: 14px;
     height: 100%;
-    width: 140px;
+    width: 130px;
     line-height: 50px;
     cursor: default;
     text-align: center;
@@ -677,7 +723,6 @@ h3 {
     font-size: 14px;
     height: 100%;
     width: 110px;
-/*     line-height: 50px; */
     line-height: 20px;
     cursor: default;
     text-align: left;
@@ -713,11 +758,12 @@ h3 {
 }
 
 .hricondiv {
-	width: 60px;
+	width: 50px;
     height: 100%;
     padding-top: 10px;
     cursor: default;
     float: left;
+    text-align:center;
 }
 
 .hrhumidityicon {
@@ -806,7 +852,7 @@ h3 {
 		margin-top:20px;
 	}
 
-	.hourwrapper {
+	.list {
 		margin-top:0px;
 	}
 	.dayouter {
@@ -972,7 +1018,7 @@ h3 {
 	.hour:hover {
 		margin-top:20px;
 	}
-	.hourwrapper {
+	.list {
 		margin-top:0px;
 	}
 

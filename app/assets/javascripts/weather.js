@@ -12,7 +12,9 @@ var MYWEATHER = {
 	fulldays:      ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     hourfields:    ["hrwind", "hrtempactual", "hrtempapparent"],
     numhourfields: 0,
-	convertfields: ["condition", "wind", "high", "high2", "high3", "high4", "high5", "low", "low2", "low3", "low4", "low5"],
+	convertfields: ["condition", "wind", "wind2", "wind3", "wind4", "wind5", "wind6", "wind7", "wind8",
+                                 "high", "high2", "high3", "high4", "high5", "high6", "high7", "high8",
+                                 "low", "low2", "low3", "low4", "low5", "low6", "low7", "low7"],
     units: { us: { wind: "mph", temp: "&deg; F" },
              ca: { wind: "kph", temp: "&deg; C" }
     }
@@ -28,7 +30,7 @@ $( document ).ready(function() {
 	}
 
 	var dzip = FUSION.get.node("defaultzipcode").value;
-    MYWEATHER.numhourfields = FUSION.get.node("hourwrapper").children.length;
+    MYWEATHER.numhourfields = FUSION.get.node("hourlist").children.length;
 
 	if(supportsHtml5Storage())
 	{
@@ -221,6 +223,31 @@ function supportsHtml5Storage()
 		FUSION.error.logError(err);
 		return false;
 	}
+}
+
+
+function showPane(t)
+{
+    var el = t.id.split("_")[0];
+    switch(el)
+    {
+        case "hour":
+            FUSION.get.node("hour_wrapper").style.display = "block";
+            FUSION.get.node("hour_tab").style.borderBottom = "none";
+            FUSION.get.node("hour_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
+            FUSION.get.node("day_wrapper").style.display = "none";
+            FUSION.get.node("day_tab").style.borderBottom = "1px solid #ddd";
+            FUSION.get.node("day_tab").style.boxShadow = "none";
+            break;
+        case "day":
+            FUSION.get.node("hour_wrapper").style.display = "none";
+            FUSION.get.node("hour_tab").style.borderBottom = "1px solid #ddd";
+            FUSION.get.node("hour_tab").style.boxShadow = "none";
+            FUSION.get.node("day_wrapper").style.display = "block";
+            FUSION.get.node("day_tab").style.borderBottom = "none";
+            FUSION.get.node("day_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
+            break;
+    }
 }
 
 
@@ -444,10 +471,15 @@ function processForecast(h)
 		var dstr = "";
 		var k = 0;
 
+        wind = 0;
+		drct = "";
+		brng = "";
+		wstr = "N/A 0 " + su;
+        humd = 0;
 		rain = 0;
 		hitp = {};
 		lotp = {};
-		for(var j = 1; j < 5; j++)
+		for(var j = 1; j < 8; j++)
 		{
 			k = j + 1;
 
@@ -468,6 +500,17 @@ function processForecast(h)
 			rain += "%";
 			FUSION.get.node("rainchance" + k).innerHTML = rain;
 			skycons.add("condimg" + k, daly[j]['icon']);
+            humd = Math.round(daly[j]['humidity'] * 100);
+			humd += "%";
+			FUSION.get.node("humidity" + k).innerHTML = humd;
+
+            wind = Math.round(daly[j]['windSpeed']);
+			drct = daly[j]['windBearing'];
+			brng = wind > 0 ? getWindBearing(drct) : "N/A";
+			wstr = brng + " " + wind + " " + su;
+			hrwd = { "type":"wind", "value":wind, "units":units, "text":{ "left":brng + " ", "right":"" }};
+			FUSION.get.node("wind" + k + "_cnvrt").value = JSON.stringify(hrwd);
+			FUSION.get.node("wind" + k).innerHTML = wstr;
 		}
 
 		skycons.play();

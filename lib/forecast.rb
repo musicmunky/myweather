@@ -52,7 +52,7 @@ class Forecast
 				result['num_reqs']  = headinfo['x-forecast-api-calls'][0].to_i
 				result['code']      = response.code.to_i
 				result['hourly']    = respjson['hourly']['data'][1..12]
-				result['daily']     = respjson['daily']['data'][0..5]
+				result['daily']     = respjson['daily']['data']
 				result['current']   = respjson['currently']
 				result['timezone']  = respjson['timezone']
 				result['tz_offset'] = respjson['offset'] # offset is deprecated, need to update the code to account for this

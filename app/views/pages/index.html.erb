@@ -95,23 +95,44 @@
 				</div>
 			</div>
 		</div>
-			<div class='hourheader' id='hourheader'>
-				<div id='hourofdayheader' class='hourofday'>
-					<div class='hrheader hrtimediv' id='hrdisplayheader'>TIME</div>
-					<div class='hrheader hricondiv' id='hricondivheader'></div>
-					<div class='hrheader hrconddiv' id='hrcondtionheader'>DESCRIPTION</div>
-					<div class='hrheader hrprecdiv' id='hrrainheader'>PRECIPITATION</div>
-					<div class='hrheader hrtempdiv' id='hrtempheader'>TEMP / <i>INDEX</i></div>
-					<div class='hrheader hrprecdiv' id='hrhumdheader'>HUMIDITY</div>
-					<div class='hrheader hrwinddiv' id='hrwindheader'>WIND</div>
-				</div>
-			</div>
-		<div id="hourwrapper" class="w100fl hourwrapper">
-			<%= render 'shared/weather_hours', start_hours: 1, end_hours: 12 %>
-		</div>
-		<div id="daywrapper" class="w100fl daywrapper">
-			<%= render 'shared/weather_days', start_days: 2, end_days: 5 %>
-		</div>
+        <div id="tabs" class="tabwrapper">
+            <div id="hour_tab" class="tabs" onclick="showPane(this)">12 Hour Forecast</div>
+            <div id="day_tab" class="tabs" onclick="showPane(this)">7 Day Forecast</div>
+        </div>
+        <div id="panes" class="panewrapper">
+            <div id="hour_wrapper" class="wrapper">
+                <div class='hourheader' id='hourheader'>
+                    <div id='hourofdayheader' class='hourofday'>
+                        <div class='hrheader hrtimediv' id='hrdisplayheader'>TIME</div>
+                        <div class='hrheader hricondiv' id='hricondivheader'></div>
+                        <div class='hrheader hrconddiv' id='hrcondtionheader'>DESCRIPTION</div>
+                        <div class='hrheader hrprecdiv' id='hrrainheader'>PRECIPITATION</div>
+                        <div class='hrheader hrtempdiv' id='hrtempheader'>TEMP / <i>INDEX</i></div>
+                        <div class='hrheader hrprecdiv' id='hrhumdheader'>HUMIDITY</div>
+                        <div class='hrheader hrwinddiv' id='hrwindheader'>WIND</div>
+                    </div>
+                </div>
+		        <div id="hourlist" class="w100fl list">
+			        <%= render 'shared/weather_hours', start_hours: 1, end_hours: 12 %>
+		        </div>
+            </div>
+            <div id="day_wrapper" class="wrapper">
+                <div class='hourheader' id='dayheader'>
+                    <div id='daylistheader' class='hourofday'>
+                        <div class='hrheader hrtimediv' id='hrdisplayheader'>DATE</div>
+                        <div class='hrheader hricondiv' id='hricondivheader'></div>
+                        <div class='hrheader hrconddiv' id='hrcondtionheader'>DESCRIPTION</div>
+                        <div class='hrheader hrprecdiv' id='hrrainheader'>PRECIPITATION</div>
+                        <div class='hrheader hrtempdiv' id='hrtempheader'>HIGH / LOW</div>
+                        <div class='hrheader hrprecdiv' id='hrhumdheader'>HUMIDITY</div>
+                        <div class='hrheader hrwinddiv' id='hrwindheader'>WIND</div>
+                    </div>
+                </div>
+                <div id="daylist" class="w100fl list">
+                    <%= render 'shared/weather_days', start_days: 2, end_days: 8 %>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>
 
