@@ -7,7 +7,7 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color:#333;
+	background-color:#eee;
 	font-family: 'Lato', serif;
 	cursor:default;
 }
@@ -19,7 +19,7 @@ a {
 
 h3 {
 	margin-top:0px;
-	color:#FFF;
+	color:#000;
 	border-bottom:1px solid #DDD;
 	margin-bottom:10px;
 	padding-bottom:10px;
