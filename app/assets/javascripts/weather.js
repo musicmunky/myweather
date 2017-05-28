@@ -235,17 +235,21 @@ function showPane(t)
             FUSION.get.node("hour_wrapper").style.display = "block";
             FUSION.get.node("hour_tab").style.borderBottom = "none";
             FUSION.get.node("hour_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
+            FUSION.get.node("hour_tab").style.backgroundColor = "#fff";
             FUSION.get.node("day_wrapper").style.display = "none";
             FUSION.get.node("day_tab").style.borderBottom = "1px solid #ddd";
             FUSION.get.node("day_tab").style.boxShadow = "none";
+            FUSION.get.node("day_tab").style.backgroundColor = "#fafafa";
             break;
         case "day":
             FUSION.get.node("hour_wrapper").style.display = "none";
             FUSION.get.node("hour_tab").style.borderBottom = "1px solid #ddd";
             FUSION.get.node("hour_tab").style.boxShadow = "none";
+            FUSION.get.node("hour_tab").style.backgroundColor = "#fafafa";
             FUSION.get.node("day_wrapper").style.display = "block";
             FUSION.get.node("day_tab").style.borderBottom = "none";
             FUSION.get.node("day_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
+            FUSION.get.node("day_tab").style.backgroundColor = "#fff";
             break;
     }
 }
@@ -479,7 +483,8 @@ function processForecast(h)
 		rain = 0;
 		hitp = {};
 		lotp = {};
-		for(var j = 1; j < 8; j++)
+
+		for(var j = 1; j < daly.length; j++)
 		{
 			k = j + 1;
 
