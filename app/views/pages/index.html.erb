@@ -96,8 +96,14 @@
 			</div>
 		</div>
         <div id="tabs" class="tabwrapper">
-            <div id="hour_tab" class="tabs" onclick="showPane(this)">12 Hour Forecast</div>
-            <div id="day_tab" class="tabs" onclick="showPane(this)">7 Day Forecast</div>
+            <div id="hour_tab" class="tabs" onclick="showPane(this)">
+                <div class="tab_highlight" id="hour_tab_highlight"></div>
+                12 Hour Forecast
+            </div>
+            <div id="day_tab" class="tabs" onclick="showPane(this)">
+                <div class="tab_highlight" id="day_tab_highlight"></div>
+                7 Day Forecast
+            </div>
         </div>
         <div id="panes" class="panewrapper">
             <div id="hour_wrapper" class="wrapper">

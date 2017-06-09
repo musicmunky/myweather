@@ -60,6 +60,10 @@ button, input, optgroup, select, textarea {
 	border-radius:4px;
 }
 
+.fl_alert_button:focus {
+    outline:none;
+}
+
 .fl_alert_button_div {
 	position:absolute;
 	bottom:0;

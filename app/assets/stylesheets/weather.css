@@ -42,12 +42,18 @@ h3 {
     background-color:#f1f1f1;
 }
 
+.tab_highlight {
+    width:100%;
+    height:4px;
+    border-radius: 4px 4px 0px 0px;
+}
+
 .tabs {
     float: left;
     width: calc(50% - 19px);
     text-align: center;
     height: 50px;
-    line-height: 50px;
+    line-height: 45px;
     border-radius: 4px 4px 0px 0px;
     border: 1px solid #ddd;
     margin-left: 9px;
@@ -76,8 +82,8 @@ h3 {
     background-color:#fafafa;
 }
 
-#hour_tab {
-    box-shadow: 0px -2px 3px -2px rgba(0, 0, 0, 1);
+#hour_tab_highlight {
+    background-color:#666;
 }
 
 .rails_form {

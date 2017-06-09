@@ -14,7 +14,7 @@ var MYWEATHER = {
     numhourfields: 0,
 	convertfields: ["condition", "wind", "wind2", "wind3", "wind4", "wind5", "wind6", "wind7", "wind8",
                                  "high", "high2", "high3", "high4", "high5", "high6", "high7", "high8",
-                                 "low", "low2", "low3", "low4", "low5", "low6", "low7", "low7"],
+                                 "low", "low2", "low3", "low4", "low5", "low6", "low7", "low8"],
     units: { us: { wind: "mph", temp: "&deg; F" },
              ca: { wind: "kph", temp: "&deg; C" }
     }
@@ -232,23 +232,23 @@ function showPane(t)
     switch(el)
     {
         case "hour":
+            FUSION.get.node("hour_tab_highlight").style.backgroundColor = "#666"
             FUSION.get.node("hour_wrapper").style.display = "block";
             FUSION.get.node("hour_tab").style.borderBottom = "none";
-            FUSION.get.node("hour_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
             FUSION.get.node("hour_tab").style.backgroundColor = "#fff";
+            FUSION.get.node("day_tab_highlight").style.backgroundColor = "#fafafa"
             FUSION.get.node("day_wrapper").style.display = "none";
             FUSION.get.node("day_tab").style.borderBottom = "1px solid #ddd";
-            FUSION.get.node("day_tab").style.boxShadow = "none";
             FUSION.get.node("day_tab").style.backgroundColor = "#fafafa";
             break;
         case "day":
+            FUSION.get.node("hour_tab_highlight").style.backgroundColor = "#fafafa"
             FUSION.get.node("hour_wrapper").style.display = "none";
             FUSION.get.node("hour_tab").style.borderBottom = "1px solid #ddd";
-            FUSION.get.node("hour_tab").style.boxShadow = "none";
             FUSION.get.node("hour_tab").style.backgroundColor = "#fafafa";
+            FUSION.get.node("day_tab_highlight").style.backgroundColor = "#666"
             FUSION.get.node("day_wrapper").style.display = "block";
             FUSION.get.node("day_tab").style.borderBottom = "none";
-            FUSION.get.node("day_tab").style.boxShadow = "0px -2px 3px -2px rgba(0, 0, 0, 1)"
             FUSION.get.node("day_tab").style.backgroundColor = "#fff";
             break;
     }
