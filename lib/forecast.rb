@@ -54,6 +54,7 @@ class Forecast
 				result['hourly']    = respjson['hourly']['data'][1..12]
 				result['daily']     = respjson['daily']['data']
 				result['current']   = respjson['currently']
+                result['alerts']    = respjson['alerts']
 				result['timezone']  = respjson['timezone']
 				result['tz_offset'] = respjson['offset'] # offset is deprecated, need to update the code to account for this
 			else

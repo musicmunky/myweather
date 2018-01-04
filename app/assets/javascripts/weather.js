@@ -228,30 +228,38 @@ function supportsHtml5Storage()
 
 function showPane(t)
 {
-    var el = t.id.split("_")[0];
-    switch(el)
+    var sType = t.id.split("_")[0];
+    var aTypes = ["hour", "day", "map", "alerts"];
+
+    for(var i = 0; i < aTypes.length; i++)
     {
-        case "hour":
-            FUSION.get.node("hour_tab_highlight").style.backgroundColor = "#666"
-            FUSION.get.node("hour_wrapper").style.display = "block";
-            FUSION.get.node("hour_tab").style.borderBottom = "none";
-            FUSION.get.node("hour_tab").style.backgroundColor = "#fff";
-            FUSION.get.node("day_tab_highlight").style.backgroundColor = "#fafafa"
-            FUSION.get.node("day_wrapper").style.display = "none";
-            FUSION.get.node("day_tab").style.borderBottom = "1px solid #ddd";
-            FUSION.get.node("day_tab").style.backgroundColor = "#fafafa";
-            break;
-        case "day":
-            FUSION.get.node("hour_tab_highlight").style.backgroundColor = "#fafafa"
-            FUSION.get.node("hour_wrapper").style.display = "none";
-            FUSION.get.node("hour_tab").style.borderBottom = "1px solid #ddd";
-            FUSION.get.node("hour_tab").style.backgroundColor = "#fafafa";
-            FUSION.get.node("day_tab_highlight").style.backgroundColor = "#666"
-            FUSION.get.node("day_wrapper").style.display = "block";
-            FUSION.get.node("day_tab").style.borderBottom = "none";
-            FUSION.get.node("day_tab").style.backgroundColor = "#fff";
-            break;
+        if( aTypes[i] == sType )
+        {
+            setActive(aTypes[i]);
+        }
+        else
+        {
+            setInactive(aTypes[i]);
+        }
     }
+}
+
+
+function setInactive(sType)
+{
+    FUSION.get.node(sType + "_tab_highlight").style.backgroundColor = "#fafafa";
+    FUSION.get.node(sType + "_wrapper").style.display = "none";
+    FUSION.get.node(sType + "_tab").style.borderBottom = "1px solid #ddd";
+    FUSION.get.node(sType + "_tab").style.backgroundColor = "#fafafa";
+}
+
+
+function setActive(sType)
+{
+    FUSION.get.node(sType + "_tab_highlight").style.backgroundColor = "#666";
+    FUSION.get.node(sType + "_wrapper").style.display = "block";
+    FUSION.get.node(sType + "_tab").style.borderBottom = "none";
+    FUSION.get.node(sType + "_tab").style.backgroundColor = "#fff";
 }
 
 
@@ -368,6 +376,24 @@ function processForecast(h)
 		//if(lcs) {
 		//	setLsActive(geoinfo.place_id);
 		//}
+
+        var map = FUSION.get.node('maplist');
+        var lat = geoinfo.latitude;
+        var lng = geoinfo.longitude;
+
+        var ifr = document.createElement("iframe");
+        ifr.id = "map-embed-iframe";
+        ifr.frameBorder = "0";
+        ifr.height = "370px";
+        ifr.width  = "100%";
+        ifr.src    = "https://maps.darksky.net/@radar," + lat + "," + lng + ",8";
+//   <script src='https://darksky.net/map-embed/@radar,39.231,-77.166,9.js?embed=true&timeControl=true&fieldControl=true&defaultField=radar'></script>
+//        ifr.src =  "https://maps.darksky.net/@radar," + lat + "," + lng + ",8?domain=";
+//        ifr.src += encodeURIComponent(window.location.href);
+//        ifr.src += "&auth=1507724619_25625fd9d21ffe92b29ba43a4260b50c&embed=true&amp;timeControl=true&amp;fieldControl=true&amp;defaultField=radar";
+        map.innerHTML = "";
+        map.appendChild(ifr);
+
 
 		FUSION.get.node("footerlocation").innerHTML = geoinfo.formatted_address;
 		FUSION.get.node("location").innerHTML = geoinfo.formatted_address;

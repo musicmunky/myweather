@@ -40,6 +40,7 @@ h3 {
     float:left;
     width:100%;
     background-color:#f1f1f1;
+    text-align: center;
 }
 
 .tab_highlight {
@@ -50,7 +51,7 @@ h3 {
 
 .tabs {
     float: left;
-    width: calc(50% - 19px);
+    width: calc(25% - 20px);
     text-align: center;
     height: 50px;
     line-height: 45px;
@@ -80,10 +81,36 @@ h3 {
 #day_tab {
     border-bottom:1px solid #ddd;
     background-color:#fafafa;
+/*     float:unset; */
+}
+
+#map_wrapper {
+    display:none;
+}
+
+#map_tab {
+    border-bottom:1px solid #ddd;
+    background-color:#fafafa;
+}
+
+#maplist {
+    height:400px;
+    padding:10px;
 }
 
 #hour_tab_highlight {
     background-color:#666;
+}
+
+#alerts_tab {
+    border-bottom:1px solid #ddd;
+    background-color:#fafafa;
+    float:right !important;
+}
+
+#alertlist {
+    height:400px;
+    padding:10px;
 }
 
 .rails_form {

@@ -104,6 +104,14 @@
                 <div class="tab_highlight" id="day_tab_highlight"></div>
                 7 Day Forecast
             </div>
+            <div id="map_tab" class="tabs" onclick="showPane(this)">
+                <div class="tab_highlight" id="map_tab_highlight"></div>
+                Local Radar
+            </div>
+            <div id="alerts_tab" class="tabs" onclick="showPane(this)">
+                <div class="tab_highlight" id="alerts_tab_highlight"></div>
+                Local Alerts
+            </div>
         </div>
         <div id="panes" class="panewrapper">
             <div id="hour_wrapper" class="wrapper">
@@ -138,6 +146,18 @@
                     <%= render 'shared/weather_days', start_days: 2, end_days: 8 %>
                 </div>
             </div>
+
+            <div id="map_wrapper" class="wrapper">
+                <div id="maplist" class="w100fl list">
+                    <!--<script id="weather_map" src='https://darksky.net/map-embed/@radar,39.147,-76.437,8.js?embed=true&timeControl=true&fieldControl=true&defaultField=radar'></script>-->
+                </div>
+            </div>
+
+            <div id="alerts_wrapper" class="wrapper">
+                <div id="alertlist" class="w100fl list">
+                </div>
+            </div>
+
         </div>
 	</div>
 </div>
