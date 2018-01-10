@@ -462,6 +462,12 @@ function processForecast(h)
 
 		var crnt = hash['forecast']['current'];
 		var daly = hash['forecast']['daily'];
+        var alrt = [];
+
+        if(hash['forecast'].hasOwnProperty( 'alerts' ) && typeof hash['forecast']['alerts'] !== "undefined" && hash['forecast']['alerts'] !== null)
+        {
+            alrt = hash['forecast']['alerts'];
+        }
 
 		var ct = new Date((crnt['time'] + ofst) * 1000);
 		var dstr = MYWEATHER.days[ct.getDay()] + " / " + MYWEATHER.months[ct.getMonth()] + " " + ct.getDate() + ", " + ct.getFullYear();
@@ -544,6 +550,8 @@ function processForecast(h)
 			FUSION.get.node("wind" + k).innerHTML = wstr;
 		}
 
+        buildWeatherAlerts(alrt);
+
 		skycons.play();
 
 		//quick check to see if a new location div is required
@@ -552,6 +560,113 @@ function processForecast(h)
 		addCityDiv(geoinfo);
 	}
 }
+
+
+
+/**
+alerts:[
+    {
+        description:"...WIND CHILL ADVISORY REMAINS IN EFFECT UNTIL 10 AM EST SATURDAY... * WHAT...Very cold wind chills expected. The cold wind chills will cause frostbite in as little as 30 minutes to exposed skin. Expect wind chills to range from 15 to 20 below zero at times. * WHERE...Portions of northeast New Jersey, southern Connecticut and southeast New York. * WHEN...Until 10 AM EST Saturday. * ADDITIONAL DETAILS...Wind gusts around 45 mph will result in areas of blowing and drifting snow, and may lead to minor property damage and isolated power outages. PRECAUTIONARY/PREPAREDNESS ACTIONS... A Wind Chill Advisory means that cold air and the wind will combine to create low wind chills. Frost bite and hypothermia can occur if precautions are not taken. Make sure you wear a hat and gloves.↵"
+        expires:1515250800
+        regions:[
+            0:"Northern Fairfield",
+            1:"Northern Middlesex",
+            2:"Northern New Haven",
+            3:"Northern New London",
+            4:"Southern Fairfield",
+            5:"Southern Middlesex",
+            6:"Southern New Haven",
+            7:"Southern New London"
+        ]
+        severity:"advisory"
+        time:1515170400
+        title:"Wind Chill Advisory"
+        uri:"https://alerts.weather.gov/cap/wwacapget.php?x=CT125A8BFFF4E0.WindChillAdvisory.125A8C0F0070CT.OKXWSWOKX.2d4b7a840dfb26dcd404585db5806853"
+    }
+]
+*/
+
+function buildWeatherAlerts(aAlerts)
+{
+    var oAlert     = {};
+
+    /*aAlerts = [{
+        description:"...WIND CHILL ADVISORY REMAINS IN EFFECT UNTIL 10 AM EST SATURDAY... * WHAT...Very cold wind chills expected. The cold wind chills will cause frostbite in as little as 30 minutes to exposed skin. Expect wind chills to range from 15 to 20 below zero at times. * WHERE...Portions of northeast New Jersey, southern Connecticut and southeast New York. * WHEN...Until 10 AM EST Saturday. * ADDITIONAL DETAILS...Wind gusts around 45 mph will result in areas of blowing and drifting snow, and may lead to minor property damage and isolated power outages. PRECAUTIONARY/PREPAREDNESS ACTIONS... A Wind Chill Advisory means that cold air and the wind will combine to create low wind chills. Frost bite and hypothermia can occur if precautions are not taken. Make sure you wear a hat and gloves.",
+        expires:1515250800,
+        regions:[
+            "Northern Fairfield",
+            "Northern Middlesex",
+            "Northern New Haven",
+            "Northern New London",
+            "Southern Fairfield",
+            "Southern Middlesex",
+            "Southern New Haven",
+            "Southern New London"],
+        severity:"warning",
+        time:1515170400,
+        title:"Wind Chill Advisory",
+        uri:"https://alerts.weather.gov/cap/wwacapget.php?x=CT125A8BFFF4E0.WindChillAdvisory.125A8C0F0070CT.OKXWSWOKX.2d4b7a840dfb26dcd404585db5806853",
+    }];*/
+
+    var sAlertHtml = "";
+    var oAlertDiv  = FUSION.get.node("alertlist");
+    var oSeverity  = {
+        "advisory": "alert_bg_info",
+        "watch": "alert_bg_warning",
+        "warning": "alert_bg_danger"
+    };
+
+    oAlertDiv.innerHTML = "";
+
+    try {
+        var nNumAlerts = aAlerts.length;
+        if( nNumAlerts > 0 )
+        {
+            sAlertHtml = "<div class='panel-group' id='alert_items' role='tablist' aria-multiselectable='true'>";
+            var sIn = "";
+            for( var i = 0; i < nNumAlerts; i++ )
+            {
+                oAlert = aAlerts[i];
+
+                sIn = (i == 0) ? " in" : "";
+                var utcSeconds = parseInt(oAlert['expires']);
+                var dDate = new Date(0); // set the date to midnight dec 31, 1969
+                dDate.setUTCSeconds(utcSeconds);
+                var sDate = dDate.toString();
+
+                sAlertHtml += "<div class='panel panel-default'>";
+                sAlertHtml += "<div class='panel-heading " + oSeverity[oAlert['severity']] + "' role='tab' id='alert_heading_" + i + "'>";
+                sAlertHtml += "<h4 class='panel-title'>";
+                sAlertHtml += "<a role='button' data-toggle='collapse' data-parent='alert_items' href='#alert_collapse_" + i + "' aria-expanded='true' aria-controls='alert_collapse_" + i + "'>";
+                sAlertHtml += oAlert['title'] + "</a>";
+                sAlertHtml += "</h4>";
+                sAlertHtml += "</div>";
+                sAlertHtml += "<div id='alert_collapse_" + i + "' class='panel-collapse collapse" + sIn + "' role='tabpanel' aria-labelledby='alert_heading_" + i + "'>";
+                sAlertHtml += "<div class='panel-body'>";
+                sAlertHtml += "<div id='alert_description'><h5>DESCRIPTION</h5><span>" + oAlert['description'] + "</span></div>";
+                if( oAlert['regions'].length > 0 )
+                {
+                    var sRegions = oAlert['regions'].join(', ');
+                    sAlertHtml += "<div id='alert_regions'><h5>AFFECTED REGIONS</h5>" + sRegions + "</div>";
+                }
+                sAlertHtml += "<div id='alert_expires'><h5>EXPIRES</h5>" + sDate + "</div>";
+                sAlertHtml += "<div id='alert_nws_link_div'><a id='alert_nws_link' target='_blank' href='" + oAlert['uri'] + "'>Alert Link</a>";
+                sAlertHtml += "</div></div></div></div></div>";
+            }
+            sAlertHtml += "</div>";
+        }
+        else
+        {
+            sAlertHtml = "<div style='width: 100%;float: left;padding: 10px;font-size: 16px;font-weight: bold;'>No Alert Data to Display</div>";
+        }
+
+        oAlertDiv.innerHTML = sAlertHtml;
+    }
+    catch(err) {
+        FUSION.error.logError(err, "Unable to create build Alert items: ");
+    }
+}
+
 
 
 function addCityDiv(h)

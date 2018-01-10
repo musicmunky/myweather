@@ -102,6 +102,10 @@ h3 {
     background-color:#666;
 }
 
+#alerts_wrapper {
+    display:none;
+}
+
 #alerts_tab {
     border-bottom:1px solid #ddd;
     background-color:#fafafa;
@@ -111,6 +115,46 @@ h3 {
 #alertlist {
     height:400px;
     padding:10px;
+}
+
+#alert_description {
+    float:left;
+}
+
+#alert_description > span {
+    font-style:italic;
+}
+
+.panel-body h5 {
+    float:left;
+    width:100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.panel-body div {
+    margin-bottom:10px;
+}
+
+#alert_nws_link_div {
+    float:left;
+}
+
+#alert_nws_link {
+    font-weight:bold;
+}
+
+.alert_bg_info {
+    background-color:#d9edf7 !important;
+}
+
+.alert_bg_warning {
+    background-color:#fcf8e3 !important;
+}
+
+.alert_bg_danger {
+    background-color:#f2dede !important;
 }
 
 .rails_form {
