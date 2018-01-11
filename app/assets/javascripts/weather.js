@@ -562,58 +562,36 @@ function processForecast(h)
 }
 
 
-
-/**
-alerts:[
-    {
-        description:"...WIND CHILL ADVISORY REMAINS IN EFFECT UNTIL 10 AM EST SATURDAY... * WHAT...Very cold wind chills expected. The cold wind chills will cause frostbite in as little as 30 minutes to exposed skin. Expect wind chills to range from 15 to 20 below zero at times. * WHERE...Portions of northeast New Jersey, southern Connecticut and southeast New York. * WHEN...Until 10 AM EST Saturday. * ADDITIONAL DETAILS...Wind gusts around 45 mph will result in areas of blowing and drifting snow, and may lead to minor property damage and isolated power outages. PRECAUTIONARY/PREPAREDNESS ACTIONS... A Wind Chill Advisory means that cold air and the wind will combine to create low wind chills. Frost bite and hypothermia can occur if precautions are not taken. Make sure you wear a hat and gloves.↵"
-        expires:1515250800
-        regions:[
-            0:"Northern Fairfield",
-            1:"Northern Middlesex",
-            2:"Northern New Haven",
-            3:"Northern New London",
-            4:"Southern Fairfield",
-            5:"Southern Middlesex",
-            6:"Southern New Haven",
-            7:"Southern New London"
-        ]
-        severity:"advisory"
-        time:1515170400
-        title:"Wind Chill Advisory"
-        uri:"https://alerts.weather.gov/cap/wwacapget.php?x=CT125A8BFFF4E0.WindChillAdvisory.125A8C0F0070CT.OKXWSWOKX.2d4b7a840dfb26dcd404585db5806853"
-    }
-]
-*/
+// Sample Alert JSON:
+/*aAlerts = [{
+    description:"...WIND CHILL ADVISORY REMAINS IN EFFECT UNTIL 10 AM EST SATURDAY... * WHAT...Very cold wind chills expected. The cold wind chills will cause frostbite in as little as 30 minutes to exposed skin. Expect wind chills to range from 15 to 20 below zero at times. * WHERE...Portions of northeast New Jersey, southern Connecticut and southeast New York. * WHEN...Until 10 AM EST Saturday. * ADDITIONAL DETAILS...Wind gusts around 45 mph will result in areas of blowing and drifting snow, and may lead to minor property damage and isolated power outages. PRECAUTIONARY/PREPAREDNESS ACTIONS... A Wind Chill Advisory means that cold air and the wind will combine to create low wind chills. Frost bite and hypothermia can occur if precautions are not taken. Make sure you wear a hat and gloves.",
+    expires:1515250800,
+    regions:[
+        "Northern Fairfield",
+        "Northern Middlesex",
+        "Northern New Haven",
+        "Northern New London",
+        "Southern Fairfield",
+        "Southern Middlesex",
+        "Southern New Haven",
+        "Southern New London"],
+    severity:"warning",
+    time:1515170400,
+    title:"Wind Chill Advisory",
+    uri:"https://alerts.weather.gov/cap/wwacapget.php?x=CT125A8BFFF4E0.WindChillAdvisory.125A8C0F0070CT.OKXWSWOKX.2d4b7a840dfb26dcd404585db5806853",
+}];*/
 
 function buildWeatherAlerts(aAlerts)
 {
     var oAlert     = {};
-
-    /*aAlerts = [{
-        description:"...WIND CHILL ADVISORY REMAINS IN EFFECT UNTIL 10 AM EST SATURDAY... * WHAT...Very cold wind chills expected. The cold wind chills will cause frostbite in as little as 30 minutes to exposed skin. Expect wind chills to range from 15 to 20 below zero at times. * WHERE...Portions of northeast New Jersey, southern Connecticut and southeast New York. * WHEN...Until 10 AM EST Saturday. * ADDITIONAL DETAILS...Wind gusts around 45 mph will result in areas of blowing and drifting snow, and may lead to minor property damage and isolated power outages. PRECAUTIONARY/PREPAREDNESS ACTIONS... A Wind Chill Advisory means that cold air and the wind will combine to create low wind chills. Frost bite and hypothermia can occur if precautions are not taken. Make sure you wear a hat and gloves.",
-        expires:1515250800,
-        regions:[
-            "Northern Fairfield",
-            "Northern Middlesex",
-            "Northern New Haven",
-            "Northern New London",
-            "Southern Fairfield",
-            "Southern Middlesex",
-            "Southern New Haven",
-            "Southern New London"],
-        severity:"warning",
-        time:1515170400,
-        title:"Wind Chill Advisory",
-        uri:"https://alerts.weather.gov/cap/wwacapget.php?x=CT125A8BFFF4E0.WindChillAdvisory.125A8C0F0070CT.OKXWSWOKX.2d4b7a840dfb26dcd404585db5806853",
-    }];*/
-
     var sAlertHtml = "";
+    var sAlertTab  = "";
     var oAlertDiv  = FUSION.get.node("alertlist");
+    var oAlertTab  = FUSION.get.node('alert_tab_text');
     var oSeverity  = {
         "advisory": "alert_bg_info",
-        "watch": "alert_bg_warning",
-        "warning": "alert_bg_danger"
+        "watch":    "alert_bg_warning",
+        "warning":  "alert_bg_danger"
     };
 
     oAlertDiv.innerHTML = "";
@@ -627,12 +605,12 @@ function buildWeatherAlerts(aAlerts)
             for( var i = 0; i < nNumAlerts; i++ )
             {
                 oAlert = aAlerts[i];
+                sIn    = (i == 0) ? " in" : "";
 
-                sIn = (i == 0) ? " in" : "";
-                var utcSeconds = parseInt(oAlert['expires']);
-                var dDate = new Date(0); // set the date to midnight dec 31, 1969
-                dDate.setUTCSeconds(utcSeconds);
-                var sDate = dDate.toString();
+                var nUTCSeconds = parseInt(oAlert['expires']);
+                var oDate = new Date(0); // set the date to midnight dec 31, 1969
+                oDate.setUTCSeconds(nUTCSeconds);
+                var sDate = oDate.toString();
 
                 sAlertHtml += "<div class='panel panel-default'>";
                 sAlertHtml += "<div class='panel-heading " + oSeverity[oAlert['severity']] + "' role='tab' id='alert_heading_" + i + "'>";
@@ -654,13 +632,16 @@ function buildWeatherAlerts(aAlerts)
                 sAlertHtml += "</div></div></div></div></div>";
             }
             sAlertHtml += "</div>";
+            sAlertTab   = "Local Alerts <span class='glyphicon glyphicon-exclamation-sign alert_icon' aria-hidden='true'></span>";
         }
         else
         {
             sAlertHtml = "<div style='width: 100%;float: left;padding: 10px;font-size: 16px;font-weight: bold;'>No Alert Data to Display</div>";
+            sAlertTab  = "Local Alerts";
         }
 
         oAlertDiv.innerHTML = sAlertHtml;
+        oAlertTab.innerHTML = sAlertTab;
     }
     catch(err) {
         FUSION.error.logError(err, "Unable to create build Alert items: ");

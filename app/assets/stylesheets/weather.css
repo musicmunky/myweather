@@ -157,6 +157,13 @@ h3 {
     background-color:#f2dede !important;
 }
 
+.alert_icon {
+    color: #a94442;
+    padding-left: 10px;
+    position: absolute;
+    top: 16px;
+}
+
 .rails_form {
 	margin-left:auto;
 	margin-right:auto;
