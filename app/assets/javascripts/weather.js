@@ -636,7 +636,7 @@ function buildWeatherAlerts(aAlerts)
         }
         else
         {
-            sAlertHtml = "<div style='width: 100%;float: left;padding: 10px;font-size: 16px;font-weight: bold;'>No Alert Data to Display</div>";
+            sAlertHtml = "<div style='width:100%;float:left;padding:50px;font-size:21px;text-align:center;font-style:italic;color:#666;'>No Alert Data to Display</div>";
             sAlertTab  = "Local Alerts";
         }
 
